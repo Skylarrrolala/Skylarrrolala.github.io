@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .contact {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.3s;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="scroll-progress"></div>
+        <div class="humburger">
+            <i class="fa-solid fa-bars-staggered"  data-visible="true"></i>
+            <i class="fa-solid fa-xmark"  data-visible="false"></i>
+        </div>
+      <nav class="container navbar">
+        <div class="theme-toggle">
+            <button id="theme-toggle-btn" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+        <ul class="nav-links"  data-visible="false">
+            <li><a href="#About">About me</a></li>
+            <li><a href="#education-experience">Education</a></li>
+            <li><a href="#Skills">Skills</a></li>
+            <li><a href="#portofolio">Portfolio</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <a class="btn" href="#contact">Contact Me</a>
+        </ul>
+      </nav>
+    </header>
+    <main>
+        <section class="hero ">
+            <div class="bg-img">
+                <img src="./images/bg.png" alt="">
+            </div>
+            <div class="hero-top container">
+                
+                <div class="content">
+                    
+                    <div class="info">
+                        <h1>Hi, I am</h1>
+                        
+                        <h2>Dararithy Heng</h2>
+                       <h6><span id="typing-text"></span><span class="cursor">|</span></h6>
+                    </div>
+                    <div class="contact-me">
+                       <a href="https://www.linkedin.com/in/dararithy-heng-790a5a2a9/" target="_blank">
+                           <img src="./images/linkedin.png" alt="LinkedIn" class="social-logo">
+                       </a>
+                        <a href="https://github.com/Skylarrrolala" target="_blank">
+                            <img src="./images/github.png" alt="GitHub" class="social-logo">
+                        </a>
+                    </div>
+                    
+                </div>
+                
+                <div class="person-img">
+                    <img src="./images/person 2.png" alt="person">
+                </div>
+            </div>
+        </section>
+        <section class="BERRIES">
+            <h4><i>AI enthusiast. Product builder. Coffee-powered coder.</i></h4>
+            <p>
+                AI tinkerer, product builder, and business-minded problem solver. I love taking<br>
+                concepts from sketches to working solutions while thinking about impact, growth,<br>
+                and user experience. Coffee keeps the ideas flowing. 
+            </p>
+            <span>READ MORE</span>
+
+        </section>
+        <section class="aboutme container " id="About">
+            <div class="section-title">
+                <span class="title-number">01</span>
+                <h4>About Me</h4>
+                <div class="title-accent"></div>
+            </div>
+            <div class="header-info">
+                <p>I'm Dararithy Heng, goes by Skylar, a computer science student passionate about AI, coding, and building products that make an impact.<br>
+                    I love combining technology with business and marketing to create solutions that people actually want to use. <br>Outside of coding, I enjoy exploring new ideas, organizing hackathons, and learning everything I can about tech and product design.</p>
+                    <h6>EXPLORE</h6>
+            </div>
+            <div class="grid-about">
+                <div class="development columns">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h6>DEVELOPMENT</h6>
+                    <p>Full-stack web development using modern technologies like React, Node.js, and MongoDB. From concept to deployment, I build scalable applications with clean code and optimal performance.</p>
+                    <ul class="service-features">
+                        <li>Frontend & Backend Development</li>
+                        <li>Database Design & Integration</li>
+                        <li>API Development & Integration</li>
+                        <li>Performance Optimization</li>
+                    </ul>
+                </div>
+                
+                <div class="design columns">
+                    <div class="service-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h6>DESIGN</h6>
+                    <p>User-centered design focused on creating intuitive and engaging digital experiences. I combine aesthetic appeal with functional usability to deliver designs that users love.</p>
+                    <ul class="service-features">
+                        <li>UI/UX Design & Prototyping</li>
+                        <li>Responsive Web Design</li>
+                        <li>Brand Identity & Visual Design</li>
+                        <li>User Research & Testing</li>
+                    </ul>
+                </div>
+                
+                <div class="maintenance columns">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h6>MAINTENANCE</h6>
+                    <p>Ongoing support and maintenance to keep your digital products running smoothly. Regular updates, security patches, and feature enhancements to ensure long-term success.</p>
+                    <ul class="service-features">
+                        <li>Regular Updates & Security Patches</li>
+                        <li>Performance Monitoring</li>
+                        <li>Content Management Support</li>
+                        <li>Technical Consultation</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="education-experience container" id="education-experience">
+            <div class="section-title">
+                <span class="title-number">02</span>
+                <h4>Education</h4>
+                <div class="title-accent"></div>
+            </div>
+            <div class="edu-list">
+                <div class="edu-item">
+                    <div class="edu-logo">
+                        <img src="./images/AUPPv2.png" alt="American University of Phnom Penh logo">
+                    </div>
+                    <div class="edu-content">
+                        <h6>American University of Phnom Penh</h6>
+                        <p class="edu-location">Phnom Penh, Cambodia | Feb 2024 – Present</p>
+                        <p class="edu-degree">BSc in Computer Science</p>
+                        <span class="edu-scholarship">Techo Digital Talent Scholarship (Full)</span>
+                    </div>
+                </div>
+                <div class="edu-item">
+                    <div class="edu-logo">
+                        <img src="./images/FHSU.svg" alt="Fort Hays State University logo">
+                    </div>
+                    <div class="edu-content">
+                        <h6>Fort Hays State University <span class="dual-degree">(Dual Degree)</span></h6>
+                        <p class="edu-location">Kansas, USA | Feb 2024 – Present</p>
+                        <p class="edu-degree">BSc in Computer Science</p>
+                        <span class="edu-scholarship">Techo Digital Talent Scholarship (Full)</span>
+                    </div>
+                </div>
+                <div class="edu-item">
+                    <div class="edu-logo">
+                        <img src="./images/TGI.png" alt="TUX Global Institute logo">
+                    </div>
+                    <div class="edu-content">
+                        <h6>TUX Global Institute</h6>
+                        <p class="edu-location">Phnom Penh, Cambodia | Feb 2025 – Present</p>
+                        <p class="edu-degree">Associate's degree in Artificial Intelligence</p>
+                        <span class="edu-scholarship">Fully funded Scholarship (Full)</span>
+                    </div>
+                </div>
+                <div class="edu-item">
+                    <div class="edu-logo">
+                        <img src="./images/CSPPv2.png" alt="Collingwood School OF Phnom Penh logo">
+                    </div>
+                    <div class="edu-content">
+                        <h6>Collingwood School of Phnom Penh</h6>
+                        <p class="edu-location">Phnom Penh, Cambodia | 2017 - 2023</p>
+                        <p class="edu-degree">High School Diploma</p>
+                        <span class="edu-achievement">B Grade in National Exam (BACII)</span>
+                    </div>
+                </div>
+                <div class="edu-item">
+                    <div class="edu-logo">
+                        <img src="./images/Campus UK.png" alt="Campus UK logo">
+                    </div>
+                    <div class="edu-content">
+                        <h6>Campus UK</h6>
+                        <p class="edu-location">Phnom Penh, Cambodia | 2021 - 2024</p>
+                        <p class="edu-degree">English Program</p>
+                        <span class="edu-achievement">C1 Cambridge | IELTS 6.5</span>
+                    </div>
+                </div>
+            </div>
+            <div class="section-title">
+                <span class="title-number">03</span>
+                <h4>Experience</h4>
+                <div class="title-accent"></div>
+            </div>
+            <div class="exp-list" id="experienceList">
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <div class="exp-title">
+                            <h6>Marketing Officer</h6>
+                            <p class="company-name">AUPP Technology Center · Part-time</p>
+                            <p class="exp-location">Mar 2025 - Present · 7 mos | Phnom Penh, Cambodia</p>
+                        </div>
+                        <div class="toggle-indicator">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="exp-details">
+                        <p class="role-description">As a Marketing Officer at ATC, I lead digital and strategic communications to grow the community, build brand awareness, and drive engagement across all major tech programs and events. My role blends creative storytelling with data-backed marketing to connect with young innovators, partners, and the wider tech ecosystem.</p>
+                        <h6>What I do:</h6>
+                        <ul>
+                            <li>Plan and execute digital marketing campaigns for ATC programs, hackathons, and workshops</li>
+                            <li>Design content strategy across social platforms (Facebook, LinkedIn, Instagram), boosting visibility and engagement</li>
+                            <li>Collaborate with design, events, and partnerships teams to align marketing with program goals</li>
+                            <li>Analyze content performance and audience metrics to improve strategy and reach</li>
+                            <li>Write compelling copy for social media, email newsletters, event pages, and more</li>
+                            <li>Support community building through creative campaigns and storytelling that highlight participants and impact</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <div class="exp-title">
+                            <h6>Communication Lead</h6>
+                            <p class="company-name">ACTSmart Incubation Program</p>
+                            <p class="exp-location">Apr 2025 - Present · 6 mos | Phnom Penh, Cambodia · Hybrid</p>
+                        </div>
+                        <div class="toggle-indicator">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="exp-details">
+                        <p class="role-description">As the Communication Lead for ACTSmart, I was responsible for managing all internal and external communication across the program. I handled official announcements, drafted email updates, coordinated with teams, mentors, and judges, and ensured that messaging was clear, consistent, and aligned with the program's branding.</p>
+                        <p class="role-description">I also managed content for our Telegram channel, wrote social media captions, supported press and media outreach, and worked closely with the design and operations teams to keep participants informed and engaged throughout the hackathon and incubation phases.</p>
+                    </div>
+                </div>
+                
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <div class="exp-title">
+                            <h6>Project Initiator</h6>
+                            <p class="company-name">ATC NextGen Impact · Part-time</p>
+                            <p class="exp-location">Dec 2024 - Mar 2025 · 4 mos | Phnom Penh, Cambodia · On-site</p>
+                        </div>
+                        <div class="toggle-indicator">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="exp-details">
+                        <p class="role-description">As one of the core initiators of ATC NextGen Impact, I played a key role in bringing the vision to life—from brainstorming the concept to kicking off its first pilot programs. I led early-stage planning, aligned our goals with youth empowerment and tech innovation, and built strong foundations for long-term impact.</p>
+                        <h6>What I did:</h6>
+                        <ul>
+                            <li>Spearheaded the initial project design and roadmap for NextGen Impact, focused on youth innovation, digital skills, and career readiness</li>
+                            <li>Coordinated across departments to align resources, goals, and partnerships, helping shape a scalable program model</li>
+                            <li>Co-led the recruitment and onboarding of the first cohort of participants, mentors, and partners</li>
+                            <li>Worked on the branding and communications plan to build visibility among students and early-career changemakers</li>
+                            <li>Contributed to content design and program logistics for workshops, hackathons, and mentorship sessions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="skills container" id="Skills">
+            <div class="section-title">
+                <span class="title-number">04</span>
+                <h4>Skills</h4>
+                <div class="title-accent"></div>
+            </div>
+            <div class="using-now ">
+                <h4>💻 CURRENT TOOLS & SKILLS:</h4>
+            <div class="grid-skills">
+                <div class="grid-item item1">
+                    <img src="./images/python3.png" alt="">
+                    <div class="skill-info">
+                        <h6>Python</h6>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-progress="85"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-item item2">
+                    <img src="./images/java.png" alt="">
+                    <div class="skill-info">
+                        <h6>Java</h6>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-progress="75"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-item item3">
+                    <img src="./images/c++.svg" alt="">
+                    <div class="skill-info">
+                        <h6>C++</h6>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-progress="70"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-item item4">
+                  <img src="./images/Git-Icon-1788C 1.png" alt="">
+                    <div class="skill-info">
+                        <h6>Git & GitHub</h6>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-progress="80"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-item item5">
+                    <img src="./images/OCR.png" alt="">
+                    <div class="skill-info">
+                        <h6>OCR Tools</h6>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-progress="70"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-item item6">
+                    <img src="./images/vscode.png" alt="">
+                    <div class="skill-info">
+                        <h6>VS Code & Jupyter</h6>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-progress="90"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-item item7">
+                    <img src="./images/Figma-logo.svg" alt="">
+                    <div class="skill-info">
+                        <h6>Figma</h6>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-progress="75"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-item item8">
+                    <img src="./images/google_colab.png" alt="">
+                    <div class="skill-info">
+                        <h6>Google Colab</h6>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-progress="80"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-item item9">
+                    <img src="./images/tensorflow.png" alt="">
+                    <div class="skill-info">
+                        <h6>TensorFlow</h6>
+                        <div class="skill-progress">
+                            <div class="progress-bar" data-progress="70"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+            <div class="learning-now ">
+                <h4>📚 CURRENTLY LEARNING:</h4>
+                <div class="grid-skills">
+                    <div class="grid-item item1">
+                        <img src="./images/c++.svg" alt="">
+                        <h6>Algorithms & DS</h6>
+    
+                    </div>
+                    <div class="grid-item item2">
+                      <img src="./images/tensorflow.png" alt="">
+                        <h6>TensorFlow & PyTorch</h6>
+                    </div>
+                    <div class="grid-item item3">
+                        <img src="./images/nodejs.png" alt="">
+                        <h6>Google Colab & Kaggle</h6>
+                    </div>
+                    <div class="grid-item item4">
+                        <img src="./images/typscript.png" alt="">
+                        <h6>Notion & Figma</h6>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="other-skills ">
+                <h4>🚀 FUTURE GOALS:</h4>
+                <div class="grid-skills">
+                    <div class="grid-item item1">
+                        <img src="./images/nodejs.png" alt="">
+                        <h6>MLOps & Deployment</h6>
+    
+                    </div>
+                    <div class="grid-item item2">
+                      <img src="./images/react.svg" alt="">
+                        <h6>Full-Stack Development</h6>
+                    </div>
+                    <div class="grid-item item3">
+                        <img src="./images/mongoDb.png" alt="">
+                        <h6>Data Engineering</h6>
+                    </div>
+                    <div class="grid-item item4">
+                        <img src="./images/bootstrap-solid 1.png" alt="">
+                        <h6>PM Tools</h6>
+                    </div>
+                </div>
+                
+            </div>
+           
+        </section>
+
+        <section class="portfolio" id="portofolio">
+            <div class="header-img">
+
+            </div>
+            <div class="grid-header">
+                <div class="info">
+                    <p>ALL</p>
+                    <p>CODED</p>
+                    <p>DESIGNED</p>
+                </div>
+            </div>
+            <div class="grid-port">
+                <div class="grid-col col1" >
+                </div>
+                <div class="grid-col col2" ></div>
+                <div class="grid-col col3" ></div>
+                <div class="grid-col col4" ></div>
+                <div class="grid-col col5" ></div>
+                <div class="grid-col col6" ></div>
+            </div>
+            <div class="grid-header">
+           
+                    <p>And many more to come!</p>
+           
+            </div>
+        </section>
+        
+        <section class="blog container" id="blog">
+            <div class="section-title">
+                <span class="title-number">05</span>
+                <h4>Blog</h4>
+                <div class="title-accent"></div>
+            </div>
+            <div class="header-info">
+                <p>Sharing my thoughts on technology, development experiences, and insights from my learning journey.</p>
+                <h6>RECENT POSTS</h6>
+                <img src="./images/separatorBlack 1.png" alt="">
+            </div>
+            <div class="blog-grid">
+                <article class="blog-post">
+                    <div class="blog-date">
+                        <span class="date">15</span>
+                        <span class="month">SEP</span>
+                        <span class="year">2025</span>
+                    </div>
+                    <div class="blog-content">
+                        <h5>Getting Started with React Hooks</h5>
+                        <p>Exploring the fundamentals of React Hooks and how they've revolutionized functional component development. From useState to useEffect...</p>
+                        <div class="blog-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Frontend</span>
+                        </div>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+                
+                <article class="blog-post">
+                    <div class="blog-date">
+                        <span class="date">10</span>
+                        <span class="month">SEP</span>
+                        <span class="year">2025</span>
+                    </div>
+                    <div class="blog-content">
+                        <h5>My Journey Learning Full Stack Development</h5>
+                        <p>Reflecting on my experiences transitioning from marketing to tech. The challenges, victories, and lessons learned along the way...</p>
+                        <div class="blog-tags">
+                            <span class="tag">Career</span>
+                            <span class="tag">Learning</span>
+                            <span class="tag">Personal</span>
+                        </div>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+                
+                <article class="blog-post">
+                    <div class="blog-date">
+                        <span class="date">05</span>
+                        <span class="month">SEP</span>
+                        <span class="year">2025</span>
+                    </div>
+                    <div class="blog-content">
+                        <h5>Building Responsive Web Applications</h5>
+                        <p>Best practices for creating web applications that work seamlessly across all devices. CSS Grid, Flexbox, and modern responsive design...</p>
+                        <div class="blog-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Responsive</span>
+                            <span class="tag">Web Design</span>
+                        </div>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+            </div>
+            <div class="blog-cta">
+                <a href="#" class="btn-secondary">View All Posts</a>
+            </div>
+        </section>
+        
+        <section class="contact container" id="contact">
+            <div class="section-title">
+                <span class="title-number">06</span>
+                <h4>Contact</h4>
+                <div class="title-accent"></div>
+            </div>
+            <div class="header-info">
+                <p>Interested in working together or have a question? Feel free to reach out and I'll get back to you as soon as possible.<br>
+                    Let's connect and build something great!</p>
+                <h6>GET IN TOUCH</h6>
+                    <img src="./images/separatorBlack 1.png" alt="">
+            </div>
+            <form action="">
+                <label for="name">Name*</label>
+                <input type="text" name="name" id="name" placeholder="ENTER YOUR NAME*" required>
+                <label for="email">Email*</label>
+                <input type="email" name="email" id="email" placeholder="ENTER YOUR EMAIL*" required>
+                <label for="phone">Phone*</label>
+                <input type="text" name="phone" id="phone" placeholder="YOUR PHONE*" required pattern="[0-9+\-() ]+">
+                <label for="comment">Message*</label>
+                <input type="text" name="comment" id="comment" placeholder="YOUR MESSAGE*" required>
+                <button type="submit">SUBMIT</button>
+            </form>
+         
+        </section>
+      
+    </main>
+
+    <footer >
+        <div class="container footer-info ">
+        <div class="scroll-up ">
+
+            <a href="#"><i class="fas fa-angle-up"></i></a>
+            <h6>BACK TO TOP</h6>
+        </div>
+        <div class="social">
+            <a href="https://www.facebook.com/abdihakin.adan.56/" target="_blank"><i class="fab fa-facebook-square"></i></a>
+            <a href="https://github.com/Skylarrrolala" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/young_hakin/" target="_blank"><i class="fab fa-instagram" ></i></a>
+            <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <p >&copy;  2024 Shiinedev.All rights reserved.</p>
+    </div>
+        
+    </footer>
+    <script>
+        // Modern Animation System with Timeline Control
+        class AnimationTimeline {
+            constructor() {
+                this.animations = [];
+                this.isPlaying = false;
+            }
+            
+            add(element, options) {
+                this.animations.push({ element, options });
+                return this;
+            }
+            
+            play() {
+                this.isPlaying = true;
+                this.animations.forEach((anim, index) => {
+                    setTimeout(() => {
+                        if (this.isPlaying) {
+                            this.animateElement(anim.element, anim.options);
+                        }
+                    }, (anim.options.delay || 0) + (index * 100));
+                });
+                return this;
+            }
+            
+            animateElement(element, options) {
+                element.style.transform = options.transform || '';
+                element.style.opacity = options.opacity !== undefined ? options.opacity : '';
+                element.style.filter = options.filter || '';
+            }
+        }
+
+        // Advanced Intersection Observer with Performance Optimization
+        const modernObserverConfig = {
+            threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        // Performance-optimized scroll observer
+        const advancedScrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+                    const timeline = new AnimationTimeline();
+                    
+                    if (entry.target.classList.contains('skills')) {
+                        // Advanced staggered skill animations
+                        const skillItems = entry.target.querySelectorAll('.grid-item');
+                        skillItems.forEach((item, index) => {
+                            timeline.add(item, {
+                                delay: index * 150,
+                                transform: 'translate3d(0, 0, 0) scale(1) rotate(0deg)',
+                                opacity: 1,
+                                filter: 'blur(0px)'
+                            });
+                            
+                            setTimeout(() => {
+                                item.classList.remove('hidden-skill');
+                                item.classList.add('slideInSkill');
+                                
+                                // Add magnetic hover effect
+                                item.addEventListener('mousemove', (e) => {
+                                    const rect = item.getBoundingClientRect();
+                                    const x = e.clientX - rect.left - rect.width / 2;
+                                    const y = e.clientY - rect.top - rect.height / 2;
+                                    
+                                    requestAnimationFrame(() => {
+                                        item.style.transform = `translate3d(${x * 0.1}px, ${y * 0.1}px, 0) scale(1.05) rotate(${x * 0.02}deg)`;
+                                    });
+                                });
+                                
+                                item.addEventListener('mouseleave', () => {
+                                    requestAnimationFrame(() => {
+                                        item.style.transform = '';
+                                    });
+                                });
+                            }, index * 150);
+                        });
+                        
+                        timeline.play();
+                    } else if (entry.target.classList.contains('section-title')) {
+                        // Advanced title reveal animation
+                        const titleNumber = entry.target.querySelector('.title-number');
+                        const titleText = entry.target.querySelector('h4');
+                        const titleAccent = entry.target.querySelector('.title-accent');
+                        
+                        if (titleNumber) {
+                            titleNumber.style.animation = 'numberFloat 4s ease-in-out infinite';
+                        }
+                        if (titleText) {
+                            titleText.style.animation = 'textReveal 1s var(--ease-spring) forwards';
+                        }
+                        if (titleAccent) {
+                            titleAccent.style.animation = 'accentGrow 1s var(--ease-spring) 0.5s forwards';
+                        }
+                    } else {
+                        // General section animations with morphing
+                        entry.target.classList.remove('hidden-scroll', 'hidden-item');
+                        entry.target.classList.add('animate-in', 'slide-in');
+                        
+                        // Add parallax effect to child elements
+                        const parallaxElements = entry.target.querySelectorAll('.service-card, .edu-item, .exp-item');
+                        parallaxElements.forEach((el, index) => {
+                            el.style.animation = `morphIn ${0.8 + index * 0.1}s var(--ease-spring) ${index * 0.1}s forwards`;
+                        });
+                    }
+                    
+                    // Unobserve after animation for performance
+                    setTimeout(() => {
+                        advancedScrollObserver.unobserve(entry.target);
+                    }, 2000);
+                }
+            });
+        }, modernObserverConfig);
+
+        // Initialize all animated elements with modern observer
+        const allAnimatedElements = document.querySelectorAll('.aboutme, .education-experience, .portfolio, .blog, .contact, .BERRIES, .skills, .edu-item, .exp-item, .section-title');
+        
+        allAnimatedElements.forEach(element => {
+            if (element.classList.contains('skills')) {
+                const skillItems = element.querySelectorAll('.grid-item');
+                skillItems.forEach(item => {
+                    item.classList.add('hidden-skill');
+                    // Add modern CSS custom properties for individual timing
+                    item.style.setProperty('--animation-delay', Math.random() * 0.5 + 's');
+                });
+            } else if (element.classList.contains('edu-item') || element.classList.contains('exp-item')) {
+                element.classList.add('hidden-item');
+                // Add stagger delay based on position
+                const delay = Array.from(element.parentNode.children).indexOf(element) * 0.1;
+                element.style.setProperty('--stagger-delay', delay + 's');
+            } else if (element.classList.contains('section-title')) {
+                // Initialize section titles for reveal animations
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+            } else {
+                element.classList.add('hidden-scroll');
+            }
+            
+            advancedScrollObserver.observe(element);
+        });
+
+        // Modern cursor interaction system
+        let cursor = null;
+        
+        function initModernCursor() {
+            cursor = document.createElement('div');
+            cursor.className = 'modern-cursor';
+            cursor.innerHTML = '<div class="cursor-dot"></div><div class="cursor-ring"></div>';
+            document.body.appendChild(cursor);
+            
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+            
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+            
+            function updateCursor() {
+                const speed = 0.15;
+                cursorX += (mouseX - cursorX) * speed;
+                cursorY += (mouseY - cursorY) * speed;
+                
+                if (cursor) {
+                    cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+                }
+                
+                requestAnimationFrame(updateCursor);
+            }
+            
+            updateCursor();
+            
+            // Cursor interactions
+            const interactiveElements = document.querySelectorAll('a, button, .grid-item, .service-card, .exp-item, .edu-item');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    if (cursor) cursor.classList.add('cursor-hover');
+                });
+                el.addEventListener('mouseleave', () => {
+                    if (cursor) cursor.classList.remove('cursor-hover');
+                });
+            });
+        }
+        
+        // Initialize modern features after DOM load
+        if (window.innerWidth > 768) {
+            initModernCursor();
+        }
+
+    // Navbar animation on page load
+    const navbarHeader = document.querySelector('header');
+    const navLinks = document.querySelectorAll('.nav-links li, .nav-links .btn');
+    
+    // Animate navbar on page load
+    setTimeout(() => {
+        navbarHeader.classList.add('nav-loaded');
+        
+        navLinks.forEach((link, index) => {
+            setTimeout(() => {
+                link.classList.add('link-loaded');
+            }, index * 100);
+        });
+    }, 200);
+
+        // Throttle function for better scroll performance
+        function throttle(func, limit) {
+            let inThrottle;
+            return function() {
+                const args = arguments;
+                const context = this;
+                if (!inThrottle) {
+                    func.apply(context, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
+                }
+            }
+        }
+
+        // Optimized navbar scroll effect with requestAnimationFrame
+        let isScrolling = false;
+        
+        function updateNavbar() {
+            if (window.scrollY > 100) {
+                navbarHeader.classList.add('nav-scrolled');
+            } else {
+                navbarHeader.classList.remove('nav-scrolled');
+            }
+            isScrolling = false;
+        }
+
+        window.addEventListener('scroll', throttle(() => {
+            if (!isScrolling) {
+                requestAnimationFrame(updateNavbar);
+                isScrolling = true;
+            }
+        }, 16), { passive: true }); // 60fps throttling
+
+        // Remove redundant item observer as it's now handled by the main scrollObserver
+        // Optimized skills progress bar animation
+        const skillsSectionForProgress = document.getElementById('Skills');
+        if (skillsSectionForProgress) {
+            const skillsProgressObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Delay progress bars slightly after skill items animate
+                        setTimeout(() => {
+                            const progressBars = document.querySelectorAll('.progress-bar');
+                            progressBars.forEach((bar, index) => {
+                                setTimeout(() => {
+                                    const progress = bar.getAttribute('data-progress');
+                                    bar.style.setProperty('--progress', progress + '%');
+                                    bar.classList.add('animate');
+                                }, index * 100);
+                            });
+                        }, 500);
+                        skillsProgressObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            skillsProgressObserver.observe(skillsSectionForProgress);
+        }
+
+        let navbar = document.querySelector(".nav-links")
+        let humbergur = document.querySelector(".humburger")
+        let icons = document.querySelectorAll("i")
+
+        humbergur.addEventListener('click', function(event) {
+            let isvible = navbar.getAttribute('data-visible');
+            if (isvible == 'true') {
+                navbar.setAttribute('data-visible', 'false');
+                icons[0].setAttribute('data-visible', 'true');
+                icons[1].setAttribute('data-visible', 'false')
+            } else {
+                navbar.setAttribute('data-visible', 'true');
+                icons[0].setAttribute('data-visible', 'false');
+                icons[1].setAttribute('data-visible', 'true')
+            }
+        })
+
+        // Smooth scrolling for navbar links
+        document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').slice(1);
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Experience accordion functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const expItems = document.querySelectorAll('.exp-item');
+            
+            expItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const expDetails = this.querySelector('.exp-details');
+                    const toggleIcon = this.querySelector('.toggle-indicator i');
+                    const isCurrentlyExpanded = expDetails.classList.contains('expanded');
+                    
+                    console.log('Clicked item:', this.querySelector('h6').textContent);
+                    console.log('Currently expanded:', isCurrentlyExpanded);
+                    
+                    // Close all items first
+                    expItems.forEach(otherItem => {
+                        const otherDetails = otherItem.querySelector('.exp-details');
+                        const otherIcon = otherItem.querySelector('.toggle-indicator i');
+                        
+                        if (otherDetails.classList.contains('expanded')) {
+                            otherDetails.classList.remove('expanded');
+                            otherIcon.classList.remove('fa-minus');
+                            otherIcon.classList.add('fa-plus');
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // If the clicked item wasn't expanded, open it
+                    if (!isCurrentlyExpanded) {
+                        expDetails.classList.add('expanded');
+                        toggleIcon.classList.remove('fa-plus');
+                        toggleIcon.classList.add('fa-minus');
+                        this.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Toggle individual job details (legacy function - keeping for compatibility)
+        function toggleJobDetails(expItem) {
+            // This function is now handled by the event listener above
+            console.log('Legacy function called - should not happen');
+        }
+
+        // Optimized Scroll Progress Bar with requestAnimationFrame
+        document.addEventListener('DOMContentLoaded', function() {
+            // Main initialization code starts here
+        let scrollProgressRAF = false;
+        
+        function updateScrollProgress() {
+            const scrollProgress = document.querySelector('.scroll-progress');
+            const scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (window.scrollY / scrollTotal) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
+            scrollProgressRAF = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!scrollProgressRAF) {
+                requestAnimationFrame(updateScrollProgress);
+                scrollProgressRAF = true;
+            }
+        }, { passive: true });
+
+        // Dark Mode Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle-btn');
+        const themeIcon = themeToggleBtn.querySelector('i');
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Typing Animation
+        const typingText = document.getElementById('typing-text');
+        const texts = ['Product Manager', 'AI Developer', 'Full Stack Developer', 'Tech Enthusiast'];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeWriter() {
+            const currentText = texts[textIndex];
+            
+            if (isDeleting) {
+                typingText.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingText.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            
+            if (!isDeleting && charIndex === currentText.length) {
+                setTimeout(() => isDeleting = true, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+            }
+            
+            const typingSpeed = isDeleting ? 50 : 100;
+            setTimeout(typeWriter, typingSpeed);
+        }
+
+        // Start typing animation
+        setTimeout(typeWriter, 1000);
+        
+        // Add reduced motion support
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.body.classList.add('reduce-motion');
+        }
+        
+        // Modern scroll restoration
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        
+        console.log('🚀 Modern portfolio animation system initialized!');
+    }); // Closes DOMContentLoaded event listener
+
+    // Passive scroll listener for performance
+    window.addEventListener('scroll', () => {
+        // Handle any additional scroll-based animations here
+    }, { passive: true });
+
+    // Resize handler for responsive animations
+    window.addEventListener('resize', () => {
+        // Update animation parameters based on screen size
+        const isMobile = window.innerWidth <= 768;
+        if (typeof cursor !== 'undefined' && cursor) {
+            if (isMobile) {
+                cursor.style.display = 'none';
+            } else {
+                cursor.style.display = 'block';
+            }
+        }
+    }, { passive: true });
+
+    // Passive scroll listener for performance
+    window.addEventListener('scroll', () => {
+        // Handle any additional scroll-based animations here
+    }, { passive: true });
+
+    // Resize handler for responsive animations
+    window.addEventListener('resize', () => {
+        // Update animation parameters based on screen size
+        const isMobile = window.innerWidth <= 768;
+        if (typeof cursor !== 'undefined' && cursor) {
+            if (isMobile) {
+                cursor.style.display = 'none';
+            } else {
+                cursor.style.display = 'block';
+            }
+        }
+    }, { passive: true });
+
+    </script>
+    
+    <!-- Floating Contact Button -->
+    <div class="floating-contact" onclick="window.open('https://api.whatsapp.com/send/?phone=252619171882&text&type=phone_number&app_absent=0', '_blank')">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+</body>
+</html>
