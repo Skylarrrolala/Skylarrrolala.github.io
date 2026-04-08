@@ -1,1037 +1,1467 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .contact {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease forwards;
-            animation-delay: 0.3s;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skylar — AI Builder & CS Student</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg:      '#08090A',
+            surface: '#111214',
+            border:  '#1E2024',
+            accent:  '#6C63FF',
+            mint:    '#00D9A3',
+            muted:   '#8B8D91',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', '"Fira Code"', 'monospace'],
+          }
         }
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.min.js"}}</script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #08090A;
+      color: #FFFFFF;
+      font-family: 'Inter', system-ui, sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: #08090A; }
+    ::-webkit-scrollbar-thumb { background: #6C63FF; border-radius: 2px; }
+
+    #scroll-progress {
+      position: fixed; top: 0; left: 0;
+      height: 2px; width: 0%;
+      background: linear-gradient(90deg, #6C63FF, #00D9A3);
+      z-index: 1000; transition: width 0.1s linear;
+    }
+
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(108,99,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(108,99,255,0.035) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-mesh {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 700px 600px at 70% 50%, rgba(108,99,255,0.11) 0%, transparent 70%),
+        radial-gradient(ellipse 400px 400px at 15% 80%, rgba(0,217,163,0.07) 0%, transparent 65%),
+        radial-gradient(ellipse 300px 250px at 85% 5%, rgba(108,99,255,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #6C63FF 0%, #00D9A3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .accent-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(90deg, rgba(108,99,255,0.6), transparent);
+      box-shadow: 0 0 6px rgba(108,99,255,0.3);
+    }
+
+    .nav-link {
+      position: relative; color: #8B8D91;
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      transition: color 0.2s; text-decoration: none;
+    }
+    .nav-link::after {
+      content: ''; position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1px; background: #6C63FF;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover { color: #fff; }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link.active { color: #fff; }
+
+    .nav-cta {
+      padding: 8px 20px;
+      border: 1px solid rgba(108,99,255,0.45);
+      color: #6C63FF; font-size: 12px; font-weight: 600;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .nav-cta:hover { background: #6C63FF; color: #fff; border-color: #6C63FF; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 30px; background: #6C63FF; color: #fff;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: all 0.2s ease;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    }
+    .btn-primary:hover { background: #7d75ff; transform: translateY(-2px); box-shadow: 0 10px 28px rgba(108,99,255,0.35); }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px; color: #6C63FF;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; border: 1px solid rgba(108,99,255,0.4);
+      cursor: pointer; background: transparent; transition: all 0.2s ease;
+    }
+    .btn-secondary:hover { border-color: #6C63FF; background: rgba(108,99,255,0.08); color: #fff; transform: translateY(-1px); }
+
+    .section-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; color: #6C63FF; letter-spacing: 0.1em;
+    }
+
+    .card {
+      background: #111214; border: 1px solid #1E2024;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .card:hover { border-color: rgba(108,99,255,0.3); transform: translateY(-2px); box-shadow: 0 16px 40px rgba(0,0,0,0.5); }
+
+    .tag-chip {
+      display: inline-flex; align-items: center;
+      padding: 4px 11px; border-radius: 2px;
+      font-size: 10px; font-family: 'JetBrains Mono', monospace;
+      font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;
+      border: 1px solid rgba(108,99,255,0.28); background: rgba(108,99,255,0.07);
+      color: #8B8D91; transition: all 0.2s;
+    }
+    .tag-chip:hover { border-color: rgba(108,99,255,0.6); color: #6C63FF; background: rgba(108,99,255,0.14); }
+
+    .cursor-blink {
+      display: inline-block; width: 2px; height: 1.1em;
+      background: #6C63FF; margin-left: 3px;
+      vertical-align: text-bottom; animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    @keyframes float-a { 0%, 100% { transform: translateY(0) rotate(45deg); } 50% { transform: translateY(-18px) rotate(45deg); } }
+    @keyframes float-b { 0%, 100% { transform: translateY(0) rotate(12deg); } 50% { transform: translateY(-12px) rotate(16deg); } }
+    .float-a { animation: float-a 9s ease-in-out infinite; }
+    .float-b { animation: float-b 7s ease-in-out infinite 1.5s; }
+
+    @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .spin-slow { animation: spin-slow 22s linear infinite; }
+
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-in { opacity: 0; animation: fadeInUp 0.7s ease forwards; }
+
+    .timeline-line {
+      position: absolute; left: 0; top: 0; bottom: 0; width: 1px;
+      background: linear-gradient(to bottom, #6C63FF 0%, transparent 100%);
+    }
+    .timeline-dot {
+      position: absolute; left: -5px; top: 6px;
+      width: 9px; height: 9px; background: #6C63FF; border-radius: 50%;
+      box-shadow: 0 0 8px rgba(108,99,255,0.7);
+    }
+    .timeline-dot.dim { background: #2E3035; box-shadow: none; }
+
+    .acc-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.32s ease; }
+    .acc-body.open { grid-template-rows: 1fr; }
+    .acc-inner { overflow: hidden; }
+
+    .skill-fill {
+      height: 2px; background: linear-gradient(90deg, #6C63FF, #00D9A3);
+      border-radius: 1px; width: 0%;
+      transition: width 1.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .social-icon {
+      display: flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; border: 1px solid #1E2024;
+      color: #8B8D91; font-size: 14px; text-decoration: none; transition: all 0.2s;
+    }
+    .social-icon:hover { border-color: #6C63FF; color: #6C63FF; background: rgba(108,99,255,0.08); }
+
+    .form-field {
+      width: 100%; background: #111214; border: 1px solid #1E2024;
+      color: #fff; padding: 14px 16px;
+      font-size: 14px; font-family: 'Inter', sans-serif;
+      outline: none; transition: border-color 0.2s; resize: none;
+    }
+    .form-field:focus { border-color: #6C63FF; }
+    .form-field::placeholder { color: #3E4148; font-size: 13px; }
+
+    .badge-accent { display: inline-block; padding: 2px 10px; font-size: 10px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em; color: #6C63FF; border: 1px solid rgba(108,99,255,0.3); background: rgba(108,99,255,0.06); }
+    .badge-mint   { display: inline-block; padding: 2px 10px; font-size: 10px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em; color: #00D9A3; border: 1px solid rgba(0,217,163,0.3); background: rgba(0,217,163,0.06); }
+    .badge-muted  { display: inline-block; padding: 2px 10px; font-size: 10px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em; color: #8B8D91; border: 1px solid #1E2024; }
+
+    .mobile-menu { transform: translateX(100%); transition: transform 0.3s ease; }
+    .mobile-menu.open { transform: translateX(0); }
+
+    .blog-card { background: #111214; border: 1px solid #1E2024; padding: 28px; transition: border-color 0.25s, transform 0.25s; }
+    .blog-card:hover { border-color: rgba(108,99,255,0.3); transform: translateY(-2px); }
+
+    .glow-accent { box-shadow: 0 0 8px #6C63FF; }
+    .glow-mint   { box-shadow: 0 0 8px #00D9A3; }
+
+    @media (max-width: 768px) { .desktop-nav { display: none; } }
+    @media (min-width: 769px) { .mobile-only { display: none; } }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="scroll-progress"></div>
-        <div class="humburger">
-            <i class="fa-solid fa-bars-staggered"  data-visible="true"></i>
-            <i class="fa-solid fa-xmark"  data-visible="false"></i>
+
+<div id="scroll-progress"></div>
+
+<!-- NAV -->
+<header style="position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(8,9,10,0.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(30,32,36,0.6);">
+  <nav style="max-width:1152px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="#" style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;letter-spacing:0.15em;text-decoration:none;color:#fff;">
+      SKY<span style="color:#6C63FF;">LAR</span><span style="color:#8B8D91;">_</span>
+    </a>
+    <div class="desktop-nav" style="display:flex;align-items:center;gap:32px;">
+      <a href="#about"    class="nav-link">About</a>
+      <a href="#edu"      class="nav-link">Education</a>
+      <a href="#skills"   class="nav-link">Skills</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#blog"     class="nav-link">Blog</a>
+      <a href="#contact"  class="nav-cta">Contact</a>
+    </div>
+    <button class="mobile-only" id="menuOpen" aria-label="Open menu" style="background:none;border:none;color:#8B8D91;font-size:18px;cursor:pointer;">
+      <i class="fas fa-bars"></i>
+    </button>
+  </nav>
+</header>
+
+<!-- Mobile drawer -->
+<div class="mobile-menu mobile-only" id="mobileMenu" style="position:fixed;top:0;right:0;bottom:0;z-index:200;width:280px;background:#111214;border-left:1px solid #1E2024;padding:24px;display:flex;flex-direction:column;">
+  <button id="menuClose" aria-label="Close" style="align-self:flex-end;background:none;border:none;color:#8B8D91;font-size:20px;cursor:pointer;margin-bottom:32px;">
+    <i class="fas fa-xmark"></i>
+  </button>
+  <div style="display:flex;flex-direction:column;gap:28px;">
+    <a href="#about"    class="nav-link" style="font-size:15px;" onclick="closeMobile()">About</a>
+    <a href="#edu"      class="nav-link" style="font-size:15px;" onclick="closeMobile()">Education</a>
+    <a href="#skills"   class="nav-link" style="font-size:15px;" onclick="closeMobile()">Skills</a>
+    <a href="#projects" class="nav-link" style="font-size:15px;" onclick="closeMobile()">Projects</a>
+    <a href="#blog"     class="nav-link" style="font-size:15px;" onclick="closeMobile()">Blog</a>
+    <a href="#contact"  class="nav-cta"  style="text-align:center;margin-top:8px;" onclick="closeMobile()">Contact</a>
+  </div>
+  <div style="margin-top:auto;display:flex;gap:10px;">
+    <a href="https://www.linkedin.com/in/dararithy-heng-790a5a2a9/" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+    <a href="https://github.com/Skylarrrolala" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+  </div>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section style="position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;padding-top:64px;" class="grid-bg">
+  <div class="hero-mesh"></div>
+  <div class="float-a" id="shape1" style="position:absolute;top:120px;right:80px;width:120px;height:120px;border:1px solid rgba(108,99,255,0.12);"></div>
+  <div class="float-b" id="shape2" style="position:absolute;bottom:140px;left:60px;width:64px;height:64px;border:1px solid rgba(0,217,163,0.1);"></div>
+
+  <div style="max-width:1152px;margin:0 auto;padding:96px 24px;width:100%;position:relative;z-index:10;">
+    <div id="heroGrid" style="display:grid;gap:40px;align-items:center;">
+
+      <!-- Text -->
+      <div style="max-width:640px;">
+        <div class="fade-in" style="animation-delay:0.05s;display:flex;align-items:center;gap:12px;margin-bottom:32px;">
+          <div style="width:28px;height:1px;background:#6C63FF;"></div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6C63FF;letter-spacing:0.12em;text-transform:uppercase;">Available for opportunities</span>
+          <span style="width:7px;height:7px;border-radius:50%;background:#00D9A3;" class="glow-mint"></span>
         </div>
-      <nav class="container navbar">
-        <div class="theme-toggle">
-            <button id="theme-toggle-btn" aria-label="Toggle dark mode">
-                <i class="fas fa-moon"></i>
-            </button>
+
+        <h1 class="fade-in" style="animation-delay:0.15s;font-weight:900;line-height:1;letter-spacing:-0.02em;font-size:clamp(3rem,8vw,6.5rem);margin-bottom:6px;">
+          Dararithy<br><span class="gradient-text">Heng</span>
+        </h1>
+        <p class="fade-in" style="animation-delay:0.2s;font-family:'JetBrains Mono',monospace;font-size:12px;color:#8B8D91;margin-bottom:20px;">
+          ( goes by <span style="color:#6C63FF;">Skylar</span> )
+        </p>
+
+        <div class="fade-in" style="animation-delay:0.3s;display:flex;align-items:center;margin-bottom:28px;">
+          <span id="typing-text" style="font-family:'JetBrains Mono',monospace;font-size:clamp(1rem,2.5vw,1.3rem);color:rgba(255,255,255,0.8);font-weight:500;"></span>
+          <span class="cursor-blink"></span>
         </div>
-        <ul class="nav-links"  data-visible="false">
-            <li><a href="#About">About me</a></li>
-            <li><a href="#education-experience">Education</a></li>
-            <li><a href="#Skills">Skills</a></li>
-            <li><a href="#portofolio">Portfolio</a></li>
-            <li><a href="#blog">Blog</a></li>
-            <a class="btn" href="#contact">Contact Me</a>
+
+        <p class="fade-in" style="animation-delay:0.42s;color:#8B8D91;line-height:1.75;max-width:520px;margin-bottom:36px;font-size:15px;">
+          CS student with hands-on experience in project coordination, digital strategy, and cross-functional collaboration. Aspiring Product Manager passionate about building impactful solutions, aligning teams, and turning ideas into scalable outcomes. Coffee keeps the ideas flowing.
+        </p>
+
+        <div class="fade-in" style="animation-delay:0.54s;display:flex;flex-wrap:wrap;gap:14px;margin-bottom:36px;">
+          <a href="#projects" class="btn-primary">View My Work <i class="fas fa-arrow-right" style="font-size:11px;"></i></a>
+          <a href="#contact"  class="btn-secondary">Let's Talk <i class="fas fa-arrow-up-right-from-square" style="font-size:11px;"></i></a>
+        </div>
+
+        <div class="fade-in" style="animation-delay:0.65s;display:flex;gap:10px;">
+          <a href="https://www.linkedin.com/in/dararithy-heng-790a5a2a9/" target="_blank" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/Skylarrrolala" target="_blank" class="social-icon" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.facebook.com/abdihakin.adan.56/" target="_blank" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/young_hakin/" target="_blank" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <!-- Lanyard -->
+      <div id="heroPhoto" style="display:flex;align-items:center;justify-content:center;">
+        <div id="lanyard-canvas" style="width:380px;height:520px;position:relative;"></div>
+      </div>
+
+    </div>
+
+    <div style="position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0.4;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;letter-spacing:0.18em;">SCROLL</span>
+      <div style="width:1px;height:32px;background:linear-gradient(to bottom,#8B8D91,transparent);"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="padding:96px 0;border-top:1px solid #1E2024;">
+  <div style="max-width:1152px;margin:0 auto;padding:0 24px;">
+
+    <div class="reveal" style="display:flex;align-items:center;gap:16px;margin-bottom:64px;">
+      <span class="section-num">01 /</span>
+      <h2 style="font-size:1.5rem;font-weight:700;">About Me</h2>
+      <div class="accent-line" style="margin-left:8px;"></div>
+    </div>
+
+    <div id="aboutGrid" style="display:grid;gap:48px;">
+      <div class="reveal">
+        <p style="font-size:1.05rem;color:rgba(255,255,255,0.82);line-height:1.85;margin-bottom:20px;">
+          I'm <strong style="color:#fff;">Dararithy Heng</strong>, a computer science student passionate about AI, coding, and building products that make an impact.
+        </p>
+        <p style="color:#8B8D91;line-height:1.85;margin-bottom:32px;">
+          I love combining technology with business and marketing to create solutions that people actually want to use. Outside of coding, I enjoy exploring new ideas, organizing hackathons, and learning everything I can about tech and product design.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span class="tag-chip">Aspiring PM</span>
+          <span class="tag-chip">AI &amp; ML</span>
+          <span class="tag-chip">Product Builder</span>
+          <span class="tag-chip">Digital Strategist</span>
+          <span class="tag-chip">Hackathon Organizer</span>
+        </div>
+      </div>
+
+      <div class="reveal" style="display:grid;gap:12px;">
+        <div class="card" style="padding:24px;display:flex;gap:18px;align-items:flex-start;">
+          <div style="flex-shrink:0;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(108,99,255,0.3);color:#6C63FF;font-size:14px;"><i class="fas fa-code"></i></div>
+          <div>
+            <h3 style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Development</h3>
+            <p style="color:#8B8D91;font-size:13.5px;line-height:1.7;">Full-stack web development using React, Node.js, and MongoDB — from concept to deployment with clean code and optimal performance.</p>
+          </div>
+        </div>
+        <div class="card" style="padding:24px;display:flex;gap:18px;align-items:flex-start;">
+          <div style="flex-shrink:0;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(0,217,163,0.3);color:#00D9A3;font-size:14px;"><i class="fas fa-palette"></i></div>
+          <div>
+            <h3 style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Design</h3>
+            <p style="color:#8B8D91;font-size:13.5px;line-height:1.7;">User-centered UI/UX design combining aesthetic appeal with functional usability to deliver experiences people love.</p>
+          </div>
+        </div>
+        <div class="card" style="padding:24px;display:flex;gap:18px;align-items:flex-start;">
+          <div style="flex-shrink:0;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(108,99,255,0.3);color:#6C63FF;font-size:14px;"><i class="fas fa-chart-line"></i></div>
+          <div>
+            <h3 style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Strategy</h3>
+            <p style="color:#8B8D91;font-size:13.5px;line-height:1.7;">Digital marketing and communications strategy to grow communities, build brand awareness, and drive engagement.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION + EXPERIENCE -->
+<section id="edu" style="padding:96px 0;border-top:1px solid #1E2024;background:rgba(17,18,20,0.4);">
+  <div style="max-width:1152px;margin:0 auto;padding:0 24px;">
+    <div id="eduExpGrid" style="display:grid;gap:64px;">
+
+      <!-- Education -->
+      <div>
+        <div class="reveal" style="display:flex;align-items:center;gap:16px;margin-bottom:48px;">
+          <span class="section-num">02 /</span>
+          <h2 style="font-size:1.5rem;font-weight:700;">Education</h2>
+        </div>
+        <div style="position:relative;padding-left:28px;">
+          <div class="timeline-line"></div>
+
+          <!-- AUPP -->
+          <div class="reveal" style="position:relative;margin-bottom:36px;transition-delay:0.05s;">
+            <div class="timeline-dot"></div>
+            <div style="display:flex;gap:14px;align-items:flex-start;">
+              <div style="flex-shrink:0;width:40px;height:40px;background:#111214;border:1px solid #1E2024;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                <img src="./images/AUPPv2.png" alt="AUPP" style="width:32px;height:32px;object-fit:contain;">
+              </div>
+              <div>
+                <h3 style="font-size:13px;font-weight:600;margin-bottom:3px;">American University of Phnom Penh</h3>
+                <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;margin-bottom:4px;">Feb 2024 – Present · Phnom Penh, Cambodia</p>
+                <p style="font-size:13px;color:rgba(255,255,255,0.75);margin-bottom:8px;">BSc in Computer Science</p>
+                <span class="badge-accent">Techo Digital Talent Scholarship (Full)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- FHSU -->
+          <div class="reveal" style="position:relative;margin-bottom:36px;transition-delay:0.12s;">
+            <div class="timeline-dot"></div>
+            <div style="display:flex;gap:14px;align-items:flex-start;">
+              <div style="flex-shrink:0;width:40px;height:40px;background:#111214;border:1px solid #1E2024;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                <img src="./images/FHSU.svg" alt="FHSU" style="width:32px;height:32px;object-fit:contain;">
+              </div>
+              <div>
+                <h3 style="font-size:13px;font-weight:600;margin-bottom:3px;">Fort Hays State University <span style="color:#6C63FF;font-size:11px;">(Dual Degree)</span></h3>
+                <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;margin-bottom:4px;">Feb 2024 – Present · Kansas, USA</p>
+                <p style="font-size:13px;color:rgba(255,255,255,0.75);margin-bottom:8px;">BSc in Computer Science</p>
+                <span class="badge-accent">Techo Digital Talent Scholarship (Full)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- TGI -->
+          <div class="reveal" style="position:relative;margin-bottom:36px;transition-delay:0.19s;">
+            <div class="timeline-dot" style="background:#00D9A3;box-shadow:0 0 8px rgba(0,217,163,0.6);"></div>
+            <div style="display:flex;gap:14px;align-items:flex-start;">
+              <div style="flex-shrink:0;width:40px;height:40px;background:#111214;border:1px solid #1E2024;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                <img src="./images/TGI.png" alt="TGI" style="width:32px;height:32px;object-fit:contain;">
+              </div>
+              <div>
+                <h3 style="font-size:13px;font-weight:600;margin-bottom:3px;">TUX Global Institute</h3>
+                <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;margin-bottom:4px;">Feb 2025 – Present · Phnom Penh, Cambodia</p>
+                <p style="font-size:13px;color:rgba(255,255,255,0.75);margin-bottom:8px;">Associate's Degree in Artificial Intelligence</p>
+                <span class="badge-mint">Fully Funded Scholarship</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Collingwood -->
+          <div class="reveal" style="position:relative;margin-bottom:36px;transition-delay:0.26s;">
+            <div class="timeline-dot dim"></div>
+            <div style="display:flex;gap:14px;align-items:flex-start;">
+              <div style="flex-shrink:0;width:40px;height:40px;background:#111214;border:1px solid #1E2024;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                <img src="./images/CSPPv2.png" alt="CSPP" style="width:32px;height:32px;object-fit:contain;">
+              </div>
+              <div>
+                <h3 style="font-size:13px;font-weight:600;margin-bottom:3px;">Collingwood School of Phnom Penh</h3>
+                <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;margin-bottom:4px;">2017 – 2023 · Phnom Penh, Cambodia</p>
+                <p style="font-size:13px;color:rgba(255,255,255,0.75);margin-bottom:8px;">High School Diploma</p>
+                <span class="badge-muted">B Grade — National Exam (BACII)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Campus UK -->
+          <div class="reveal" style="position:relative;transition-delay:0.33s;">
+            <div class="timeline-dot dim"></div>
+            <div style="display:flex;gap:14px;align-items:flex-start;">
+              <div style="flex-shrink:0;width:40px;height:40px;background:#111214;border:1px solid #1E2024;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                <img src="./images/CAMPUS UK.png" alt="Campus UK" style="width:32px;height:32px;object-fit:contain;">
+              </div>
+              <div>
+                <h3 style="font-size:13px;font-weight:600;margin-bottom:3px;">Campus UK</h3>
+                <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;margin-bottom:4px;">2021 – 2024 · Phnom Penh, Cambodia</p>
+                <p style="font-size:13px;color:rgba(255,255,255,0.75);margin-bottom:8px;">English Program</p>
+                <span class="badge-muted">C1 Cambridge · IELTS 6.5</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Experience -->
+      <div>
+        <div class="reveal" style="display:flex;align-items:center;gap:16px;margin-bottom:48px;">
+          <span class="section-num">03 /</span>
+          <h2 style="font-size:1.5rem;font-weight:700;">Experience</h2>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px;">
+
+          <!-- ADITI — Current, most recent -->
+          <div class="card reveal" style="transition-delay:0.05s;" data-acc>
+            <div style="padding:22px 24px;display:flex;align-items:flex-start;justify-content:space-between;cursor:pointer;" onclick="toggleAcc(this)">
+              <div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                  <span style="width:6px;height:6px;border-radius:50%;background:#00D9A3;flex-shrink:0;" class="glow-mint"></span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#00D9A3;letter-spacing:0.06em;">Current</span>
+                </div>
+                <h3 style="font-size:13.5px;font-weight:600;margin-bottom:3px;">Digital Marketing Strategist</h3>
+                <p style="font-size:12px;color:#8B8D91;">ADITI — Asia Digital Technology Innovation · Dec 2025 – Present</p>
+              </div>
+              <i class="fas fa-plus acc-icon" style="font-size:11px;color:#8B8D91;margin-top:4px;transition:transform 0.3s;flex-shrink:0;"></i>
+            </div>
+            <div class="acc-body">
+              <div class="acc-inner" style="padding:0 24px 22px;">
+                <p style="font-size:13px;color:#8B8D91;line-height:1.75;margin-bottom:14px;">Lead marketing for NironCare, ADITI, and ADITI Academy across social media and digital channels. Create and manage engaging content while ensuring brand consistency across platforms.</p>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Led digital initiatives across multiple brands, coordinating design, content, and strategy teams</li>
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Translated business goals into campaign strategies ensuring alignment across stakeholders</li>
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Monitored performance metrics and iterated strategies based on data insights</li>
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Supported partnership development and cross-team collaboration</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- ATC — ended -->
+          <div class="card reveal" style="transition-delay:0.1s;" data-acc>
+            <div style="padding:22px 24px;display:flex;align-items:flex-start;justify-content:space-between;cursor:pointer;" onclick="toggleAcc(this)">
+              <div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                  <span style="width:6px;height:6px;border-radius:50%;background:#2E3035;flex-shrink:0;"></span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;letter-spacing:0.06em;">Mar 2025 – Nov 2025</span>
+                </div>
+                <h3 style="font-size:13.5px;font-weight:600;margin-bottom:3px;">Junior Associate, Program &amp; Marketing</h3>
+                <p style="font-size:12px;color:#8B8D91;">AUPP Technology Center (ATC)</p>
+              </div>
+              <i class="fas fa-plus acc-icon" style="font-size:11px;color:#8B8D91;margin-top:4px;transition:transform 0.3s;flex-shrink:0;"></i>
+            </div>
+            <div class="acc-body">
+              <div class="acc-inner" style="padding:0 24px 22px;">
+                <p style="font-size:13px;color:#8B8D91;line-height:1.75;margin-bottom:14px;">Planned and executed campaigns supporting tech programs, hackathons, and workshops, improving visibility and participant engagement.</p>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Coordinated with design, events, and partnership teams to align communication and program goals</li>
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Analyzed campaign performance and user engagement insights to refine strategy</li>
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Supported community-building initiatives through structured content and event-focused collaboration</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Communication Lead — ended -->
+          <div class="card reveal" style="transition-delay:0.15s;" data-acc>
+            <div style="padding:22px 24px;display:flex;align-items:flex-start;justify-content:space-between;cursor:pointer;" onclick="toggleAcc(this)">
+              <div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                  <span style="width:6px;height:6px;border-radius:50%;background:#2E3035;flex-shrink:0;"></span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;letter-spacing:0.06em;">Apr 2025 – Nov 2025</span>
+                </div>
+                <h3 style="font-size:13.5px;font-weight:600;margin-bottom:3px;">Communication Lead</h3>
+                <p style="font-size:12px;color:#8B8D91;">ACTSmart Incubation Program</p>
+              </div>
+              <i class="fas fa-plus acc-icon" style="font-size:11px;color:#8B8D91;margin-top:4px;transition:transform 0.3s;flex-shrink:0;"></i>
+            </div>
+            <div class="acc-body">
+              <div class="acc-inner" style="padding:0 24px 22px;">
+                <p style="font-size:13px;color:#8B8D91;line-height:1.75;margin-bottom:14px;">Managed all internal and external communication — official announcements, email updates, and coordination across teams, mentors, and judges to ensure smooth program execution.</p>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Managed Telegram channel, social media captions, and press/media outreach</li>
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Coordinated cross-functional teams to align timelines, messaging, and operational objectives</li>
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Improved collaboration processes to enhance participant experience and program delivery</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Initiator -->
+          <div class="card reveal" style="transition-delay:0.2s;" data-acc>
+            <div style="padding:22px 24px;display:flex;align-items:flex-start;justify-content:space-between;cursor:pointer;" onclick="toggleAcc(this)">
+              <div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                  <span style="width:6px;height:6px;border-radius:50%;background:#2E3035;flex-shrink:0;"></span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;letter-spacing:0.06em;">Dec 2024 – Mar 2025</span>
+                </div>
+                <h3 style="font-size:13.5px;font-weight:600;margin-bottom:3px;">Project Initiator</h3>
+                <p style="font-size:12px;color:#8B8D91;">ATC NextGen Impact</p>
+              </div>
+              <i class="fas fa-plus acc-icon" style="font-size:11px;color:#8B8D91;margin-top:4px;transition:transform 0.3s;flex-shrink:0;"></i>
+            </div>
+            <div class="acc-body">
+              <div class="acc-inner" style="padding:0 24px 22px;">
+                <p style="font-size:13px;color:#8B8D91;line-height:1.75;margin-bottom:14px;">Core initiator of ATC NextGen Impact — from brainstorming the concept to kicking off first pilot programs focused on youth innovation, digital skills, and career readiness.</p>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Spearheaded project design and roadmap, coordinating across departments for scalable execution</li>
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Co-led recruitment and onboarding of participants, mentors, and partners for first cohort</li>
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Built branding and communications plan; contributed to workshops and mentorship logistics</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="padding:96px 0;border-top:1px solid #1E2024;">
+  <div style="max-width:1152px;margin:0 auto;padding:0 24px;">
+
+    <div class="reveal" style="display:flex;align-items:center;gap:16px;margin-bottom:64px;">
+      <span class="section-num">04 /</span>
+      <h2 style="font-size:1.5rem;font-weight:700;">Skills</h2>
+      <div class="accent-line" style="margin-left:8px;"></div>
+    </div>
+
+    <div id="skillsGrid" style="display:grid;gap:56px;">
+
+      <!-- Skill bars -->
+      <div class="reveal" id="skillsSection">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6C63FF;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:28px;">Current Tools & Skills</p>
+        <div style="display:flex;flex-direction:column;gap:20px;">
+
+          <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;"><img src="./images/vscode.png" alt="" style="width:16px;height:16px;object-fit:contain;">VS Code &amp; Jupyter</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8B8D91;">90%</span></div><div style="height:2px;background:#1E2024;border-radius:1px;"><div class="skill-fill" data-p="90"></div></div></div>
+
+          <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;"><img src="./images/python3.png" alt="" style="width:16px;height:16px;object-fit:contain;">Python</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8B8D91;">85%</span></div><div style="height:2px;background:#1E2024;border-radius:1px;"><div class="skill-fill" data-p="85"></div></div></div>
+
+          <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;"><img src="./images/Git-Icon-1788C 1.png" alt="" style="width:16px;height:16px;object-fit:contain;">Git &amp; GitHub</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8B8D91;">80%</span></div><div style="height:2px;background:#1E2024;border-radius:1px;"><div class="skill-fill" data-p="80"></div></div></div>
+
+          <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;"><img src="./images/google_colab.png" alt="" style="width:16px;height:16px;object-fit:contain;">Google Colab</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8B8D91;">80%</span></div><div style="height:2px;background:#1E2024;border-radius:1px;"><div class="skill-fill" data-p="80"></div></div></div>
+
+          <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;"><img src="./images/java.png" alt="" style="width:16px;height:16px;object-fit:contain;">Java</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8B8D91;">75%</span></div><div style="height:2px;background:#1E2024;border-radius:1px;"><div class="skill-fill" data-p="75"></div></div></div>
+
+          <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;"><img src="./images/Figma-logo.svg" alt="" style="width:16px;height:16px;object-fit:contain;">Figma</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8B8D91;">75%</span></div><div style="height:2px;background:#1E2024;border-radius:1px;"><div class="skill-fill" data-p="75"></div></div></div>
+
+          <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;"><img src="./images/c++.svg" alt="" style="width:16px;height:16px;object-fit:contain;">C++</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8B8D91;">70%</span></div><div style="height:2px;background:#1E2024;border-radius:1px;"><div class="skill-fill" data-p="70"></div></div></div>
+
+          <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;"><img src="./images/tensorflow.png" alt="" style="width:16px;height:16px;object-fit:contain;">TensorFlow</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8B8D91;">70%</span></div><div style="height:2px;background:#1E2024;border-radius:1px;"><div class="skill-fill" data-p="70"></div></div></div>
+
+          <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;"><img src="./images/OCR.png" alt="" style="width:16px;height:16px;object-fit:contain;">OCR Tools</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8B8D91;">70%</span></div><div style="height:2px;background:#1E2024;border-radius:1px;"><div class="skill-fill" data-p="70"></div></div></div>
+
+          <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;"><img src="./images/javascript.svg" alt="" style="width:16px;height:16px;object-fit:contain;">JavaScript (Basic)</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8B8D91;">60%</span></div><div style="height:2px;background:#1E2024;border-radius:1px;"><div class="skill-fill" data-p="60"></div></div></div>
+        </div>
+
+        <!-- Tools row -->
+        <div style="margin-top:32px;padding-top:24px;border-top:1px solid #1E2024;">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:16px;">Product &amp; Analytics Tools</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span class="tag-chip">Streamlit</span>
+            <span class="tag-chip">Excel</span>
+            <span class="tag-chip">Google Workspace</span>
+            <span class="tag-chip">Canva</span>
+            <span class="tag-chip">Notion</span>
+            <span class="tag-chip">Arduino</span>
+          </div>
+        </div>
+
+        <!-- Certifications -->
+        <div style="margin-top:24px;padding-top:24px;border-top:1px solid #1E2024;">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:16px;">Certifications</p>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.72);">
+              <i class="fas fa-certificate" style="color:#6C63FF;font-size:11px;flex-shrink:0;"></i>Programming for Everybody — Getting Started with Python
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.72);">
+              <i class="fas fa-certificate" style="color:#6C63FF;font-size:11px;flex-shrink:0;"></i>Introduction to Software Engineering
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Learning + Goals -->
+      <div class="reveal" id="learnGoalsGrid" style="transition-delay:0.2s;display:grid;gap:32px;">
+        <div>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#00D9A3;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:20px;">Currently Learning</p>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div style="display:flex;align-items:center;gap:12px;font-size:13px;color:rgba(255,255,255,0.72);"><span style="width:1px;height:16px;background:rgba(0,217,163,0.4);flex-shrink:0;"></span>Algorithms &amp; Data Structures</div>
+            <div style="display:flex;align-items:center;gap:12px;font-size:13px;color:rgba(255,255,255,0.72);"><span style="width:1px;height:16px;background:rgba(0,217,163,0.4);flex-shrink:0;"></span>TensorFlow &amp; PyTorch</div>
+            <div style="display:flex;align-items:center;gap:12px;font-size:13px;color:rgba(255,255,255,0.72);"><span style="width:1px;height:16px;background:rgba(0,217,163,0.4);flex-shrink:0;"></span>Google Colab &amp; Kaggle</div>
+            <div style="display:flex;align-items:center;gap:12px;font-size:13px;color:rgba(255,255,255,0.72);"><span style="width:1px;height:16px;background:rgba(0,217,163,0.4);flex-shrink:0;"></span>Notion &amp; Figma Advanced</div>
+          </div>
+        </div>
+        <div>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6C63FF;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:20px;">Future Goals</p>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div style="display:flex;align-items:center;gap:12px;font-size:13px;color:#8B8D91;"><span style="width:1px;height:16px;background:rgba(108,99,255,0.4);flex-shrink:0;"></span>MLOps &amp; Deployment</div>
+            <div style="display:flex;align-items:center;gap:12px;font-size:13px;color:#8B8D91;"><span style="width:1px;height:16px;background:rgba(108,99,255,0.4);flex-shrink:0;"></span>Full-Stack Development</div>
+            <div style="display:flex;align-items:center;gap:12px;font-size:13px;color:#8B8D91;"><span style="width:1px;height:16px;background:rgba(108,99,255,0.4);flex-shrink:0;"></span>Data Engineering</div>
+            <div style="display:flex;align-items:center;gap:12px;font-size:13px;color:#8B8D91;"><span style="width:1px;height:16px;background:rgba(108,99,255,0.4);flex-shrink:0;"></span>Product Management</div>
+          </div>
+        </div>
+
+        <!-- Core Strengths -->
+        <div style="padding-top:24px;border-top:1px solid #1E2024;">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#00D9A3;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:16px;">Core Strengths</p>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.72);"><i class="fas fa-check" style="color:#00D9A3;font-size:10px;flex-shrink:0;"></i>Product Thinking</div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.72);"><i class="fas fa-check" style="color:#00D9A3;font-size:10px;flex-shrink:0;"></i>Cross-functional Collaboration</div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.72);"><i class="fas fa-check" style="color:#00D9A3;font-size:10px;flex-shrink:0;"></i>Strategic Communication</div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.72);"><i class="fas fa-check" style="color:#00D9A3;font-size:10px;flex-shrink:0;"></i>Stakeholder Management</div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.72);"><i class="fas fa-check" style="color:#00D9A3;font-size:10px;flex-shrink:0;"></i>Program Execution</div>
+          </div>
+        </div>
+
+        <!-- Languages -->
+        <div style="padding-top:24px;border-top:1px solid #1E2024;">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6C63FF;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:16px;">Languages</p>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;">
+              <span style="color:rgba(255,255,255,0.82);">English</span>
+              <span class="badge-accent">Fluent</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;">
+              <span style="color:rgba(255,255,255,0.82);">Khmer</span>
+              <span class="badge-mint">Native</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="padding:96px 0;border-top:1px solid #1E2024;background:rgba(17,18,20,0.4);">
+  <div style="max-width:1152px;margin:0 auto;padding:0 24px;">
+    <div class="reveal" style="display:flex;align-items:center;gap:16px;margin-bottom:64px;">
+      <span class="section-num">05 /</span>
+      <h2 style="font-size:1.5rem;font-weight:700;">Projects</h2>
+      <div class="accent-line" style="margin-left:8px;"></div>
+    </div>
+    <div id="projectsGrid" style="display:grid;gap:16px;margin-bottom:48px;">
+
+      <!-- Levelio -->
+      <div class="card reveal" style="padding:32px;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:16px;flex-wrap:wrap;">
+          <div>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+              <div style="width:8px;height:8px;background:#6C63FF;border-radius:50%;" class="glow-accent"></div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6C63FF;letter-spacing:0.1em;text-transform:uppercase;">Product Concept &amp; Design</span>
+            </div>
+            <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:4px;">Levelio</h3>
+            <p style="font-size:12px;color:#8B8D91;font-family:'JetBrains Mono',monospace;">Gamified AI Learning Platform</p>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <span class="tag-chip">AI</span>
+            <span class="tag-chip">EdTech</span>
+            <span class="tag-chip">Product Design</span>
+          </div>
+        </div>
+        <p style="color:#8B8D91;font-size:13px;line-height:1.8;margin-bottom:16px;">Defined product vision for a web-based platform focused on improving completion rates in tech learning. Designed structured learning flows using gamified "levels" to guide users toward portfolio-ready projects.</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;">
+          <li style="font-size:12.5px;color:rgba(255,255,255,0.65);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;">&#9657;</span>Planned core features: AI project guidance, skill progression tracking, project-based workflows</li>
+          <li style="font-size:12.5px;color:rgba(255,255,255,0.65);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;">&#9657;</span>Conducted user-focused research to align product direction with student motivation and career-readiness needs</li>
         </ul>
-      </nav>
-    </header>
-    <main>
-        <section class="hero ">
-            <div class="bg-img">
-                <img src="./images/bg.png" alt="">
-            </div>
-            <div class="hero-top container">
-                
-                <div class="content">
-                    
-                    <div class="info">
-                        <h1>Hi, I am</h1>
-                        
-                        <h2>Dararithy Heng</h2>
-                       <h6><span id="typing-text"></span><span class="cursor">|</span></h6>
-                    </div>
-                    <div class="contact-me">
-                       <a href="https://www.linkedin.com/in/dararithy-heng-790a5a2a9/" target="_blank">
-                           <img src="./images/linkedin.png" alt="LinkedIn" class="social-logo">
-                       </a>
-                        <a href="https://github.com/Skylarrrolala" target="_blank">
-                            <img src="./images/github.png" alt="GitHub" class="social-logo">
-                        </a>
-                    </div>
-                    
-                </div>
-                
-                <div class="person-img">
-                    <img src="./images/person.png" alt="person">
-                </div>
-            </div>
-        </section>
-        <section class="BERRIES">
-            <h4><i>AI enthusiast. Product builder. Coffee-powered coder.</i></h4>
-            <p>
-                AI tinkerer, product builder, and business-minded problem solver. I love taking<br>
-                concepts from sketches to working solutions while thinking about impact, growth,<br>
-                and user experience. Coffee keeps the ideas flowing. 
-            </p>
-            <span>READ MORE</span>
-
-        </section>
-        <section class="aboutme container " id="About">
-            <div class="section-title">
-                <span class="title-number">01</span>
-                <h4>About Me</h4>
-                <div class="title-accent"></div>
-            </div>
-            <div class="header-info">
-                <p>I'm Dararithy Heng, goes by Skylar, a computer science student passionate about AI, coding, and building products that make an impact.<br>
-                    I love combining technology with business and marketing to create solutions that people actually want to use. <br>Outside of coding, I enjoy exploring new ideas, organizing hackathons, and learning everything I can about tech and product design.</p>
-                    <h6>EXPLORE</h6>
-            </div>
-            <div class="grid-about">
-                <div class="development columns">
-                    <div class="service-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h6>DEVELOPMENT</h6>
-                    <p>Full-stack web development using modern technologies like React, Node.js, and MongoDB. From concept to deployment, I build scalable applications with clean code and optimal performance.</p>
-                    <ul class="service-features">
-                        <li>Frontend & Backend Development</li>
-                        <li>Database Design & Integration</li>
-                        <li>API Development & Integration</li>
-                        <li>Performance Optimization</li>
-                    </ul>
-                </div>
-                
-                <div class="design columns">
-                    <div class="service-icon">
-                        <i class="fas fa-palette"></i>
-                    </div>
-                    <h6>DESIGN</h6>
-                    <p>User-centered design focused on creating intuitive and engaging digital experiences. I combine aesthetic appeal with functional usability to deliver designs that users love.</p>
-                    <ul class="service-features">
-                        <li>UI/UX Design & Prototyping</li>
-                        <li>Responsive Web Design</li>
-                        <li>Brand Identity & Visual Design</li>
-                        <li>User Research & Testing</li>
-                    </ul>
-                </div>
-                
-                <div class="maintenance columns">
-                    <div class="service-icon">
-                        <i class="fas fa-tools"></i>
-                    </div>
-                    <h6>MAINTENANCE</h6>
-                    <p>Ongoing support and maintenance to keep your digital products running smoothly. Regular updates, security patches, and feature enhancements to ensure long-term success.</p>
-                    <ul class="service-features">
-                        <li>Regular Updates & Security Patches</li>
-                        <li>Performance Monitoring</li>
-                        <li>Content Management Support</li>
-                        <li>Technical Consultation</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section class="education-experience container" id="education-experience">
-            <div class="section-title">
-                <span class="title-number">02</span>
-                <h4>Education</h4>
-                <div class="title-accent"></div>
-            </div>
-            <div class="edu-list">
-                <div class="edu-item">
-                    <div class="edu-logo">
-                        <img src="./images/AUPPv2.png" alt="American University of Phnom Penh logo">
-                    </div>
-                    <div class="edu-content">
-                        <h6>American University of Phnom Penh</h6>
-                        <p class="edu-location">Phnom Penh, Cambodia | Feb 2024 – Present</p>
-                        <p class="edu-degree">BSc in Computer Science</p>
-                        <span class="edu-scholarship">Techo Digital Talent Scholarship (Full)</span>
-                    </div>
-                </div>
-                <div class="edu-item">
-                    <div class="edu-logo">
-                        <img src="./images/FHSU.svg" alt="Fort Hays State University logo">
-                    </div>
-                    <div class="edu-content">
-                        <h6>Fort Hays State University <span class="dual-degree">(Dual Degree)</span></h6>
-                        <p class="edu-location">Kansas, USA | Feb 2024 – Present</p>
-                        <p class="edu-degree">BSc in Computer Science</p>
-                        <span class="edu-scholarship">Techo Digital Talent Scholarship (Full)</span>
-                    </div>
-                </div>
-                <div class="edu-item">
-                    <div class="edu-logo">
-                        <img src="./images/TGI.png" alt="TUX Global Institute logo">
-                    </div>
-                    <div class="edu-content">
-                        <h6>TUX Global Institute</h6>
-                        <p class="edu-location">Phnom Penh, Cambodia | Feb 2025 – Present</p>
-                        <p class="edu-degree">Associate's degree in Artificial Intelligence</p>
-                        <span class="edu-scholarship">Fully funded Scholarship (Full)</span>
-                    </div>
-                </div>
-                <div class="edu-item">
-                    <div class="edu-logo">
-                        <img src="./images/CSPPv2.png" alt="Collingwood School OF Phnom Penh logo">
-                    </div>
-                    <div class="edu-content">
-                        <h6>Collingwood School of Phnom Penh</h6>
-                        <p class="edu-location">Phnom Penh, Cambodia | 2017 - 2023</p>
-                        <p class="edu-degree">High School Diploma</p>
-                        <span class="edu-achievement">B Grade in National Exam (BACII)</span>
-                    </div>
-                </div>
-                <div class="edu-item">
-                    <div class="edu-logo">
-                        <img src="./images/Campus UK.png" alt="Campus UK logo">
-                    </div>
-                    <div class="edu-content">
-                        <h6>Campus UK</h6>
-                        <p class="edu-location">Phnom Penh, Cambodia | 2021 - 2024</p>
-                        <p class="edu-degree">English Program</p>
-                        <span class="edu-achievement">C1 Cambridge | IELTS 6.5</span>
-                    </div>
-                </div>
-            </div>
-            <div class="section-title">
-                <span class="title-number">03</span>
-                <h4>Experience</h4>
-                <div class="title-accent"></div>
-            </div>
-            <div class="exp-list" id="experienceList">
-                <div class="exp-item">
-                    <div class="exp-header">
-                        <div class="exp-title">
-                            <h6>Marketing Officer</h6>
-                            <p class="company-name">AUPP Technology Center · Part-time</p>
-                            <p class="exp-location">Mar 2025 - Present · 7 mos | Phnom Penh, Cambodia</p>
-                        </div>
-                        <div class="toggle-indicator">
-                            <i class="fas fa-plus"></i>
-                        </div>
-                    </div>
-                    <div class="exp-details">
-                        <p class="role-description">As a Marketing Officer at ATC, I lead digital and strategic communications to grow the community, build brand awareness, and drive engagement across all major tech programs and events. My role blends creative storytelling with data-backed marketing to connect with young innovators, partners, and the wider tech ecosystem.</p>
-                        <h6>What I do:</h6>
-                        <ul>
-                            <li>Plan and execute digital marketing campaigns for ATC programs, hackathons, and workshops</li>
-                            <li>Design content strategy across social platforms (Facebook, LinkedIn, Instagram), boosting visibility and engagement</li>
-                            <li>Collaborate with design, events, and partnerships teams to align marketing with program goals</li>
-                            <li>Analyze content performance and audience metrics to improve strategy and reach</li>
-                            <li>Write compelling copy for social media, email newsletters, event pages, and more</li>
-                            <li>Support community building through creative campaigns and storytelling that highlight participants and impact</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="exp-item">
-                    <div class="exp-header">
-                        <div class="exp-title">
-                            <h6>Communication Lead</h6>
-                            <p class="company-name">ACTSmart Incubation Program</p>
-                            <p class="exp-location">Apr 2025 - Present · 6 mos | Phnom Penh, Cambodia · Hybrid</p>
-                        </div>
-                        <div class="toggle-indicator">
-                            <i class="fas fa-plus"></i>
-                        </div>
-                    </div>
-                    <div class="exp-details">
-                        <p class="role-description">As the Communication Lead for ACTSmart, I was responsible for managing all internal and external communication across the program. I handled official announcements, drafted email updates, coordinated with teams, mentors, and judges, and ensured that messaging was clear, consistent, and aligned with the program's branding.</p>
-                        <p class="role-description">I also managed content for our Telegram channel, wrote social media captions, supported press and media outreach, and worked closely with the design and operations teams to keep participants informed and engaged throughout the hackathon and incubation phases.</p>
-                    </div>
-                </div>
-                
-                <div class="exp-item">
-                    <div class="exp-header">
-                        <div class="exp-title">
-                            <h6>Project Initiator</h6>
-                            <p class="company-name">ATC NextGen Impact · Part-time</p>
-                            <p class="exp-location">Dec 2024 - Mar 2025 · 4 mos | Phnom Penh, Cambodia · On-site</p>
-                        </div>
-                        <div class="toggle-indicator">
-                            <i class="fas fa-plus"></i>
-                        </div>
-                    </div>
-                    <div class="exp-details">
-                        <p class="role-description">As one of the core initiators of ATC NextGen Impact, I played a key role in bringing the vision to life—from brainstorming the concept to kicking off its first pilot programs. I led early-stage planning, aligned our goals with youth empowerment and tech innovation, and built strong foundations for long-term impact.</p>
-                        <h6>What I did:</h6>
-                        <ul>
-                            <li>Spearheaded the initial project design and roadmap for NextGen Impact, focused on youth innovation, digital skills, and career readiness</li>
-                            <li>Coordinated across departments to align resources, goals, and partnerships, helping shape a scalable program model</li>
-                            <li>Co-led the recruitment and onboarding of the first cohort of participants, mentors, and partners</li>
-                            <li>Worked on the branding and communications plan to build visibility among students and early-career changemakers</li>
-                            <li>Contributed to content design and program logistics for workshops, hackathons, and mentorship sessions</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="skills container" id="Skills">
-            <div class="section-title">
-                <span class="title-number">04</span>
-                <h4>Skills</h4>
-                <div class="title-accent"></div>
-            </div>
-            <div class="using-now ">
-                <h4>💻 CURRENT TOOLS & SKILLS:</h4>
-            <div class="grid-skills">
-                <div class="grid-item item1">
-                    <img src="./images/python3.png" alt="">
-                    <div class="skill-info">
-                        <h6>Python</h6>
-                        <div class="skill-progress">
-                            <div class="progress-bar" data-progress="85"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid-item item2">
-                    <img src="./images/java.png" alt="">
-                    <div class="skill-info">
-                        <h6>Java</h6>
-                        <div class="skill-progress">
-                            <div class="progress-bar" data-progress="75"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid-item item3">
-                    <img src="./images/c++.svg" alt="">
-                    <div class="skill-info">
-                        <h6>C++</h6>
-                        <div class="skill-progress">
-                            <div class="progress-bar" data-progress="70"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid-item item4">
-                  <img src="./images/Git-Icon-1788C 1.png" alt="">
-                    <div class="skill-info">
-                        <h6>Git & GitHub</h6>
-                        <div class="skill-progress">
-                            <div class="progress-bar" data-progress="80"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid-item item5">
-                    <img src="./images/OCR.png" alt="">
-                    <div class="skill-info">
-                        <h6>OCR Tools</h6>
-                        <div class="skill-progress">
-                            <div class="progress-bar" data-progress="70"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid-item item6">
-                    <img src="./images/vscode.png" alt="">
-                    <div class="skill-info">
-                        <h6>VS Code & Jupyter</h6>
-                        <div class="skill-progress">
-                            <div class="progress-bar" data-progress="90"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid-item item7">
-                    <img src="./images/Figma-logo.svg" alt="">
-                    <div class="skill-info">
-                        <h6>Figma</h6>
-                        <div class="skill-progress">
-                            <div class="progress-bar" data-progress="75"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid-item item8">
-                    <img src="./images/google_colab.png" alt="">
-                    <div class="skill-info">
-                        <h6>Google Colab</h6>
-                        <div class="skill-progress">
-                            <div class="progress-bar" data-progress="80"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid-item item9">
-                    <img src="./images/tensorflow.png" alt="">
-                    <div class="skill-info">
-                        <h6>TensorFlow</h6>
-                        <div class="skill-progress">
-                            <div class="progress-bar" data-progress="70"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            </div>
-            <div class="learning-now ">
-                <h4>📚 CURRENTLY LEARNING:</h4>
-                <div class="grid-skills">
-                    <div class="grid-item item1">
-                        <img src="./images/c++.svg" alt="">
-                        <h6>Algorithms & DS</h6>
-    
-                    </div>
-                    <div class="grid-item item2">
-                      <img src="./images/tensorflow.png" alt="">
-                        <h6>TensorFlow & PyTorch</h6>
-                    </div>
-                    <div class="grid-item item3">
-                        <img src="./images/nodejs.png" alt="">
-                        <h6>Google Colab & Kaggle</h6>
-                    </div>
-                    <div class="grid-item item4">
-                        <img src="./images/typscript.png" alt="">
-                        <h6>Notion & Figma</h6>
-                    </div>
-                </div>
-                
-            </div>
-            <div class="other-skills ">
-                <h4>🚀 FUTURE GOALS:</h4>
-                <div class="grid-skills">
-                    <div class="grid-item item1">
-                        <img src="./images/nodejs.png" alt="">
-                        <h6>MLOps & Deployment</h6>
-    
-                    </div>
-                    <div class="grid-item item2">
-                      <img src="./images/react.svg" alt="">
-                        <h6>Full-Stack Development</h6>
-                    </div>
-                    <div class="grid-item item3">
-                        <img src="./images/mongoDb.png" alt="">
-                        <h6>Data Engineering</h6>
-                    </div>
-                    <div class="grid-item item4">
-                        <img src="./images/bootstrap-solid 1.png" alt="">
-                        <h6>PM Tools</h6>
-                    </div>
-                </div>
-                
-            </div>
-           
-        </section>
-
-        <section class="portfolio" id="portofolio">
-            <div class="header-img">
-
-            </div>
-            <div class="grid-header">
-                <div class="info">
-                    <p>ALL</p>
-                    <p>CODED</p>
-                    <p>DESIGNED</p>
-                </div>
-            </div>
-            <div class="grid-port">
-                <div class="grid-col col1" >
-                </div>
-                <div class="grid-col col2" ></div>
-                <div class="grid-col col3" ></div>
-                <div class="grid-col col4" ></div>
-                <div class="grid-col col5" ></div>
-                <div class="grid-col col6" ></div>
-            </div>
-            <div class="grid-header">
-           
-                    <p>And many more to come!</p>
-           
-            </div>
-        </section>
-        
-        <section class="blog container" id="blog">
-            <div class="section-title">
-                <span class="title-number">05</span>
-                <h4>Blog</h4>
-                <div class="title-accent"></div>
-            </div>
-            <div class="header-info">
-                <p>Sharing my thoughts on technology, development experiences, and insights from my learning journey.</p>
-                <h6>RECENT POSTS</h6>
-                <img src="./images/separatorBlack 1.png" alt="">
-            </div>
-            <div class="blog-grid">
-                <article class="blog-post">
-                    <div class="blog-date">
-                        <span class="date">15</span>
-                        <span class="month">SEP</span>
-                        <span class="year">2025</span>
-                    </div>
-                    <div class="blog-content">
-                        <h5>Getting Started with React Hooks</h5>
-                        <p>Exploring the fundamentals of React Hooks and how they've revolutionized functional component development. From useState to useEffect...</p>
-                        <div class="blog-tags">
-                            <span class="tag">React</span>
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">Frontend</span>
-                        </div>
-                        <a href="#" class="read-more">Read More →</a>
-                    </div>
-                </article>
-                
-                <article class="blog-post">
-                    <div class="blog-date">
-                        <span class="date">10</span>
-                        <span class="month">SEP</span>
-                        <span class="year">2025</span>
-                    </div>
-                    <div class="blog-content">
-                        <h5>My Journey Learning Full Stack Development</h5>
-                        <p>Reflecting on my experiences transitioning from marketing to tech. The challenges, victories, and lessons learned along the way...</p>
-                        <div class="blog-tags">
-                            <span class="tag">Career</span>
-                            <span class="tag">Learning</span>
-                            <span class="tag">Personal</span>
-                        </div>
-                        <a href="#" class="read-more">Read More →</a>
-                    </div>
-                </article>
-                
-                <article class="blog-post">
-                    <div class="blog-date">
-                        <span class="date">05</span>
-                        <span class="month">SEP</span>
-                        <span class="year">2025</span>
-                    </div>
-                    <div class="blog-content">
-                        <h5>Building Responsive Web Applications</h5>
-                        <p>Best practices for creating web applications that work seamlessly across all devices. CSS Grid, Flexbox, and modern responsive design...</p>
-                        <div class="blog-tags">
-                            <span class="tag">CSS</span>
-                            <span class="tag">Responsive</span>
-                            <span class="tag">Web Design</span>
-                        </div>
-                        <a href="#" class="read-more">Read More →</a>
-                    </div>
-                </article>
-            </div>
-            <div class="blog-cta">
-                <a href="#" class="btn-secondary">View All Posts</a>
-            </div>
-        </section>
-        
-        <section class="contact container" id="contact">
-            <div class="section-title">
-                <span class="title-number">06</span>
-                <h4>Contact</h4>
-                <div class="title-accent"></div>
-            </div>
-            <div class="header-info">
-                <p>Interested in working together or have a question? Feel free to reach out and I'll get back to you as soon as possible.<br>
-                    Let's connect and build something great!</p>
-                <h6>GET IN TOUCH</h6>
-                    <img src="./images/separatorBlack 1.png" alt="">
-            </div>
-            <form action="">
-                <label for="name">Name*</label>
-                <input type="text" name="name" id="name" placeholder="ENTER YOUR NAME*" required>
-                <label for="email">Email*</label>
-                <input type="email" name="email" id="email" placeholder="ENTER YOUR EMAIL*" required>
-                <label for="phone">Phone*</label>
-                <input type="text" name="phone" id="phone" placeholder="YOUR PHONE*" required pattern="[0-9+\-() ]+">
-                <label for="comment">Message*</label>
-                <input type="text" name="comment" id="comment" placeholder="YOUR MESSAGE*" required>
-                <button type="submit">SUBMIT</button>
-            </form>
-         
-        </section>
-      
-    </main>
-
-    <footer >
-        <div class="container footer-info ">
-        <div class="scroll-up ">
-
-            <a href="#"><i class="fas fa-angle-up"></i></a>
-            <h6>BACK TO TOP</h6>
+        <div style="margin-top:20px;padding-top:16px;border-top:1px solid #1E2024;display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;">Role: Product Concept &amp; Strategy</span>
         </div>
-        <div class="social">
-            <a href="https://www.facebook.com/abdihakin.adan.56/" target="_blank"><i class="fab fa-facebook-square"></i></a>
-            <a href="https://github.com/Skylarrrolala" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://www.instagram.com/young_hakin/" target="_blank"><i class="fab fa-instagram" ></i></a>
-            <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+
+      <!-- Smart Expense Tracker -->
+      <div class="card reveal" style="padding:32px;transition-delay:0.1s;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:16px;flex-wrap:wrap;">
+          <div>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+              <div style="width:8px;height:8px;background:#00D9A3;border-radius:50%;" class="glow-mint"></div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#00D9A3;letter-spacing:0.1em;text-transform:uppercase;">Python &amp; Streamlit</span>
+            </div>
+            <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:4px;">Smart Expense Tracker</h3>
+            <p style="font-size:12px;color:#8B8D91;font-family:'JetBrains Mono',monospace;">Receipt OCR + Data Dashboard</p>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <span class="tag-chip">Python</span>
+            <span class="tag-chip">OCR</span>
+            <span class="tag-chip">Streamlit</span>
+          </div>
         </div>
-        <p >&copy;  2024 Shiinedev.All rights reserved.</p>
+        <p style="color:#8B8D91;font-size:13px;line-height:1.8;margin-bottom:16px;">Python-based expense tracking app combining manual input and OCR-powered receipt scanning for automated logging. Captures vendor, date, and amount from receipts to improve input efficiency and user experience.</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;">
+          <li style="font-size:12.5px;color:rgba(255,255,255,0.65);display:flex;gap:10px;"><span style="color:#00D9A3;flex-shrink:0;">&#9657;</span>Designed interactive dashboards with category and monthly trend visualization</li>
+          <li style="font-size:12.5px;color:rgba(255,255,255,0.65);display:flex;gap:10px;"><span style="color:#00D9A3;flex-shrink:0;">&#9657;</span>Integrated backend logic, OCR processing, and Streamlit UI in cohesive architecture</li>
+        </ul>
+        <div style="margin-top:20px;padding-top:16px;border-top:1px solid #1E2024;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;">Role: Product Design &amp; Technical Development</span>
+        </div>
+      </div>
+
+      <!-- Sales Forecasting -->
+      <div class="card reveal" style="padding:32px;transition-delay:0.2s;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:16px;flex-wrap:wrap;">
+          <div>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+              <div style="width:8px;height:8px;background:#6C63FF;border-radius:50%;" class="glow-accent"></div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6C63FF;letter-spacing:0.1em;text-transform:uppercase;">Time Series ML</span>
+            </div>
+            <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:4px;">Sales Forecasting with ML</h3>
+            <p style="font-size:12px;color:#8B8D91;font-family:'JetBrains Mono',monospace;">XGBoost · 11.6% MAPE · 0.856 R²</p>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <span class="tag-chip">ML</span>
+            <span class="tag-chip">XGBoost</span>
+            <span class="tag-chip">Python</span>
+          </div>
+        </div>
+        <p style="color:#8B8D91;font-size:13px;line-height:1.8;margin-bottom:16px;">Built a machine learning forecasting solution for monthly sales prediction using feature engineering and gradient boosting (XGBoost). Compared statistical, neural network, and ensemble approaches to evaluate performance and business applicability.</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;">
+          <li style="font-size:12.5px;color:rgba(255,255,255,0.65);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;">&#9657;</span>Engineered <strong style="color:#fff;">43 predictive features</strong> — improved accuracy ~40% over baseline</li>
+          <li style="font-size:12.5px;color:rgba(255,255,255,0.65);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;">&#9657;</span>Developed interactive dashboard to visualize forecasts and support data-driven business planning</li>
+        </ul>
+        <div style="margin-top:20px;padding-top:16px;border-top:1px solid #1E2024;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;">Role: Data &amp; Product Analytics</span>
+        </div>
+      </div>
+
     </div>
-        
-    </footer>
-    <script>
-        // Modern Animation System with Timeline Control
-        class AnimationTimeline {
-            constructor() {
-                this.animations = [];
-                this.isPlaying = false;
-            }
-            
-            add(element, options) {
-                this.animations.push({ element, options });
-                return this;
-            }
-            
-            play() {
-                this.isPlaying = true;
-                this.animations.forEach((anim, index) => {
-                    setTimeout(() => {
-                        if (this.isPlaying) {
-                            this.animateElement(anim.element, anim.options);
-                        }
-                    }, (anim.options.delay || 0) + (index * 100));
-                });
-                return this;
-            }
-            
-            animateElement(element, options) {
-                element.style.transform = options.transform || '';
-                element.style.opacity = options.opacity !== undefined ? options.opacity : '';
-                element.style.filter = options.filter || '';
-            }
-        }
+    <div class="reveal" style="text-align:center;">
+      <a href="https://github.com/Skylarrrolala" target="_blank" class="btn-secondary">
+        <i class="fab fa-github" style="font-size:13px;"></i> View GitHub Profile
+      </a>
+    </div>
+  </div>
+</section>
 
-        // Advanced Intersection Observer with Performance Optimization
-        const modernObserverConfig = {
-            threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
-            rootMargin: '0px 0px -100px 0px'
-        };
+<!-- BLOG -->
+<section id="blog" style="padding:96px 0;border-top:1px solid #1E2024;">
+  <div style="max-width:1152px;margin:0 auto;padding:0 24px;">
+    <div class="reveal" style="display:flex;align-items:center;gap:16px;margin-bottom:20px;">
+      <span class="section-num">06 /</span>
+      <h2 style="font-size:1.5rem;font-weight:700;">Blog</h2>
+      <div class="accent-line" style="margin-left:8px;"></div>
+    </div>
+    <p class="reveal" style="color:#8B8D91;margin-bottom:48px;font-size:14px;">Sharing thoughts on technology, development experiences, and insights from my learning journey.</p>
 
-        // Performance-optimized scroll observer
-        const advancedScrollObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
-                    const timeline = new AnimationTimeline();
-                    
-                    if (entry.target.classList.contains('skills')) {
-                        // Advanced staggered skill animations
-                        const skillItems = entry.target.querySelectorAll('.grid-item');
-                        skillItems.forEach((item, index) => {
-                            timeline.add(item, {
-                                delay: index * 150,
-                                transform: 'translate3d(0, 0, 0) scale(1) rotate(0deg)',
-                                opacity: 1,
-                                filter: 'blur(0px)'
-                            });
-                            
-                            setTimeout(() => {
-                                item.classList.remove('hidden-skill');
-                                item.classList.add('slideInSkill');
-                                
-                                // Add magnetic hover effect
-                                item.addEventListener('mousemove', (e) => {
-                                    const rect = item.getBoundingClientRect();
-                                    const x = e.clientX - rect.left - rect.width / 2;
-                                    const y = e.clientY - rect.top - rect.height / 2;
-                                    
-                                    requestAnimationFrame(() => {
-                                        item.style.transform = `translate3d(${x * 0.1}px, ${y * 0.1}px, 0) scale(1.05) rotate(${x * 0.02}deg)`;
-                                    });
-                                });
-                                
-                                item.addEventListener('mouseleave', () => {
-                                    requestAnimationFrame(() => {
-                                        item.style.transform = '';
-                                    });
-                                });
-                            }, index * 150);
-                        });
-                        
-                        timeline.play();
-                    } else if (entry.target.classList.contains('section-title')) {
-                        // Advanced title reveal animation
-                        const titleNumber = entry.target.querySelector('.title-number');
-                        const titleText = entry.target.querySelector('h4');
-                        const titleAccent = entry.target.querySelector('.title-accent');
-                        
-                        if (titleNumber) {
-                            titleNumber.style.animation = 'numberFloat 4s ease-in-out infinite';
-                        }
-                        if (titleText) {
-                            titleText.style.animation = 'textReveal 1s var(--ease-spring) forwards';
-                        }
-                        if (titleAccent) {
-                            titleAccent.style.animation = 'accentGrow 1s var(--ease-spring) 0.5s forwards';
-                        }
-                    } else {
-                        // General section animations with morphing
-                        entry.target.classList.remove('hidden-scroll', 'hidden-item');
-                        entry.target.classList.add('animate-in', 'slide-in');
-                        
-                        // Add parallax effect to child elements
-                        const parallaxElements = entry.target.querySelectorAll('.service-card, .edu-item, .exp-item');
-                        parallaxElements.forEach((el, index) => {
-                            el.style.animation = `morphIn ${0.8 + index * 0.1}s var(--ease-spring) ${index * 0.1}s forwards`;
-                        });
-                    }
-                    
-                    // Unobserve after animation for performance
-                    setTimeout(() => {
-                        advancedScrollObserver.unobserve(entry.target);
-                    }, 2000);
-                }
-            });
-        }, modernObserverConfig);
+    <div id="blogGrid" style="display:grid;gap:14px;">
 
-        // Initialize all animated elements with modern observer
-        const allAnimatedElements = document.querySelectorAll('.aboutme, .education-experience, .portfolio, .blog, .contact, .BERRIES, .skills, .edu-item, .exp-item, .section-title');
-        
-        allAnimatedElements.forEach(element => {
-            if (element.classList.contains('skills')) {
-                const skillItems = element.querySelectorAll('.grid-item');
-                skillItems.forEach(item => {
-                    item.classList.add('hidden-skill');
-                    // Add modern CSS custom properties for individual timing
-                    item.style.setProperty('--animation-delay', Math.random() * 0.5 + 's');
-                });
-            } else if (element.classList.contains('edu-item') || element.classList.contains('exp-item')) {
-                element.classList.add('hidden-item');
-                // Add stagger delay based on position
-                const delay = Array.from(element.parentNode.children).indexOf(element) * 0.1;
-                element.style.setProperty('--stagger-delay', delay + 's');
-            } else if (element.classList.contains('section-title')) {
-                // Initialize section titles for reveal animations
-                element.style.opacity = '0';
-                element.style.transform = 'translateY(30px)';
-            } else {
-                element.classList.add('hidden-scroll');
-            }
-            
-            advancedScrollObserver.observe(element);
+      <article class="blog-card reveal">
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:18px;">
+          <div style="text-align:center;flex-shrink:0;"><div style="font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:800;color:#6C63FF;line-height:1;">15</div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;">SEP '25</div></div>
+          <div style="width:1px;height:40px;background:#1E2024;flex-shrink:0;"></div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;"><span class="tag-chip">React</span><span class="tag-chip">JavaScript</span><span class="tag-chip">Frontend</span></div>
+        </div>
+        <h4 style="font-size:15px;font-weight:600;line-height:1.45;margin-bottom:10px;">Getting Started with React Hooks</h4>
+        <p style="color:#8B8D91;font-size:13px;line-height:1.75;margin-bottom:18px;">Exploring the fundamentals of React Hooks and how they've revolutionized functional component development. From useState to useEffect...</p>
+        <a href="#" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#6C63FF;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#6C63FF'">Read More &rarr;</a>
+      </article>
+
+      <article class="blog-card reveal" style="transition-delay:0.1s;">
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:18px;">
+          <div style="text-align:center;flex-shrink:0;"><div style="font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:800;color:#6C63FF;line-height:1;">10</div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;">SEP '25</div></div>
+          <div style="width:1px;height:40px;background:#1E2024;flex-shrink:0;"></div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;"><span class="tag-chip">Career</span><span class="tag-chip">Learning</span><span class="tag-chip">Personal</span></div>
+        </div>
+        <h4 style="font-size:15px;font-weight:600;line-height:1.45;margin-bottom:10px;">My Journey Learning Full Stack Development</h4>
+        <p style="color:#8B8D91;font-size:13px;line-height:1.75;margin-bottom:18px;">Reflecting on my experiences transitioning from marketing to tech — the challenges, victories, and lessons learned along the way...</p>
+        <a href="#" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#6C63FF;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#6C63FF'">Read More &rarr;</a>
+      </article>
+
+      <article class="blog-card reveal" style="transition-delay:0.2s;">
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:18px;">
+          <div style="text-align:center;flex-shrink:0;"><div style="font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:800;color:#6C63FF;line-height:1;">05</div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;">SEP '25</div></div>
+          <div style="width:1px;height:40px;background:#1E2024;flex-shrink:0;"></div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;"><span class="tag-chip">CSS</span><span class="tag-chip">Responsive</span><span class="tag-chip">Web Design</span></div>
+        </div>
+        <h4 style="font-size:15px;font-weight:600;line-height:1.45;margin-bottom:10px;">Building Responsive Web Applications</h4>
+        <p style="color:#8B8D91;font-size:13px;line-height:1.75;margin-bottom:18px;">Best practices for creating web apps that work seamlessly across all devices using CSS Grid, Flexbox, and modern responsive design...</p>
+        <a href="#" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#6C63FF;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#6C63FF'">Read More &rarr;</a>
+      </article>
+
+    </div>
+    <div class="reveal" style="text-align:center;margin-top:36px;"><a href="#" class="btn-secondary">View All Posts</a></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="padding:96px 0;border-top:1px solid #1E2024;background:rgba(17,18,20,0.4);">
+  <div style="max-width:1152px;margin:0 auto;padding:0 24px;">
+    <div id="contactGrid" style="display:grid;gap:64px;">
+
+      <div class="reveal">
+        <span class="section-num">07 /</span>
+        <h2 style="font-size:clamp(2rem,5vw,3rem);font-weight:900;line-height:1.15;margin:16px 0 20px;">
+          Let's build<br><span class="gradient-text">something great.</span>
+        </h2>
+        <p style="color:#8B8D91;line-height:1.8;margin-bottom:36px;max-width:420px;font-size:14.5px;">Interested in working together or have a question? Feel free to reach out — I get back to everyone.</p>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <a href="mailto:Hdararithy@gmail.com" style="display:flex;align-items:center;gap:14px;text-decoration:none;">
+            <div class="social-icon"><i class="fas fa-envelope" style="font-size:13px;"></i></div>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#8B8D91;">Hdararithy@gmail.com</span>
+          </a>
+          <a href="tel:+85571871193" style="display:flex;align-items:center;gap:14px;text-decoration:none;">
+            <div class="social-icon"><i class="fas fa-phone" style="font-size:13px;"></i></div>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#8B8D91;">+855 71 871 1193</span>
+          </a>
+          <a href="https://www.linkedin.com/in/dararithy-heng-790a5a2a9/" target="_blank" style="display:flex;align-items:center;gap:14px;text-decoration:none;">
+            <div class="social-icon"><i class="fab fa-linkedin-in" style="font-size:13px;"></i></div>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#8B8D91;">linkedin.com/in/dararithy-heng</span>
+          </a>
+          <a href="https://github.com/Skylarrrolala" target="_blank" style="display:flex;align-items:center;gap:14px;text-decoration:none;">
+            <div class="social-icon"><i class="fab fa-github" style="font-size:13px;"></i></div>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#8B8D91;">github.com/Skylarrrolala</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="reveal" style="transition-delay:0.15s;">
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+          <div id="nameEmailRow" style="display:grid;gap:12px;margin-bottom:12px;">
+            <div>
+              <label style="display:block;font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Name *</label>
+              <input type="text" name="name" required placeholder="Your name" class="form-field">
+            </div>
+            <div>
+              <label style="display:block;font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Email *</label>
+              <input type="email" name="email" required placeholder="your@email.com" class="form-field">
+            </div>
+          </div>
+          <div style="margin-bottom:12px;">
+            <label style="display:block;font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Phone <span style="opacity:0.5;">(optional)</span></label>
+            <input type="text" name="phone" placeholder="+855 ..." class="form-field">
+          </div>
+          <div style="margin-bottom:20px;">
+            <label style="display:block;font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Message *</label>
+            <textarea name="message" required placeholder="Tell me about your project or opportunity..." rows="5" class="form-field"></textarea>
+          </div>
+          <button type="submit" class="btn-primary" id="submitBtn" style="width:100%;justify-content:center;">
+            Send Message <i class="fas fa-arrow-right" style="font-size:11px;"></i>
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer style="border-top:1px solid #1E2024;padding:40px 0;">
+  <div style="max-width:1152px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;align-items:center;gap:24px;">
+    <a href="#" style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;letter-spacing:0.15em;text-decoration:none;color:#fff;">
+      SKY<span style="color:#6C63FF;">LAR</span><span style="color:#8B8D91;">_</span>
+    </a>
+    <div style="display:flex;gap:10px;">
+      <a href="https://www.linkedin.com/in/dararithy-heng-790a5a2a9/" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://github.com/Skylarrrolala" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+      <a href="https://www.facebook.com/abdihakin.adan.56/" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/young_hakin/" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+    </div>
+    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#4A4D52;letter-spacing:0.06em;">&copy; 2026 Skylar (Dararithy Heng). All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // Responsive layout
+  function layout() {
+    const lg = window.innerWidth >= 1024;
+    const md = window.innerWidth >= 768;
+
+    document.getElementById('shape1').style.display = lg ? 'block' : 'none';
+    document.getElementById('shape2').style.display = lg ? 'block' : 'none';
+    document.getElementById('heroPhoto').style.display = md ? 'flex' : 'none';
+    document.getElementById('heroGrid').style.gridTemplateColumns = md ? '1fr 1fr' : '1fr';
+    document.getElementById('aboutGrid').style.gridTemplateColumns = lg ? '1fr 1fr' : '1fr';
+    document.getElementById('eduExpGrid').style.gridTemplateColumns = lg ? '1fr 1fr' : '1fr';
+    document.getElementById('skillsGrid').style.gridTemplateColumns = lg ? '2fr 1fr' : '1fr';
+    document.getElementById('learnGoalsGrid').style.gridTemplateColumns = md ? '1fr 1fr' : '1fr';
+    document.getElementById('blogGrid').style.gridTemplateColumns = lg ? '1fr 1fr 1fr' : (md ? '1fr 1fr' : '1fr');
+    document.getElementById('projectsGrid').style.gridTemplateColumns = lg ? '1fr 1fr 1fr' : (md ? '1fr 1fr' : '1fr');
+    document.getElementById('contactGrid').style.gridTemplateColumns = lg ? '1fr 1fr' : '1fr';
+    document.getElementById('nameEmailRow').style.gridTemplateColumns = md ? '1fr 1fr' : '1fr';
+  }
+  layout();
+  window.addEventListener('resize', layout);
+
+  // Scroll progress
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    document.getElementById('scroll-progress').style.width = pct + '%';
+  }, { passive: true });
+
+  // Typing effect
+  const roles = ['AI Enthusiast', 'Product Builder', 'CS Student', 'Coffee-Powered Coder', 'Hackathon Organizer'];
+  let rIdx = 0, cIdx = 0, del = false;
+  const typEl = document.getElementById('typing-text');
+  function type() {
+    const cur = roles[rIdx];
+    typEl.textContent = del ? cur.slice(0, cIdx - 1) : cur.slice(0, cIdx + 1);
+    del ? cIdx-- : cIdx++;
+    if (!del && cIdx === cur.length) setTimeout(() => del = true, 2000);
+    else if (del && cIdx === 0) { del = false; rIdx = (rIdx + 1) % roles.length; }
+    setTimeout(type, del ? 45 : 75);
+  }
+  type();
+
+  // Mobile menu
+  const menu = document.getElementById('mobileMenu');
+  document.getElementById('menuOpen').addEventListener('click', () => menu.classList.add('open'));
+  document.getElementById('menuClose').addEventListener('click', () => menu.classList.remove('open'));
+  function closeMobile() { menu.classList.remove('open'); }
+
+  // Accordion
+  function toggleAcc(hdr) {
+    const card = hdr.closest('[data-acc]');
+    const body = card.querySelector('.acc-body');
+    const icon = card.querySelector('.acc-icon');
+    const open = body.classList.contains('open');
+    document.querySelectorAll('.acc-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.acc-icon').forEach(i => { i.classList.remove('fa-minus'); i.classList.add('fa-plus'); });
+    if (!open) { body.classList.add('open'); icon.classList.remove('fa-plus'); icon.classList.add('fa-minus'); }
+  }
+
+  // Scroll reveal
+  const revObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revObs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+  // Skill bars
+  let barsTriggered = false;
+  const barObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !barsTriggered) {
+        barsTriggered = true;
+        document.querySelectorAll('.skill-fill').forEach((b, i) => {
+          setTimeout(() => { b.style.width = b.dataset.p + '%'; }, i * 80);
         });
+        barObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  const skillEl = document.getElementById('skillsSection');
+  if (skillEl) barObs.observe(skillEl);
 
-        // Modern cursor interaction system
-        let cursor = null;
-        
-        function initModernCursor() {
-            cursor = document.createElement('div');
-            cursor.className = 'modern-cursor';
-            cursor.innerHTML = '<div class="cursor-dot"></div><div class="cursor-ring"></div>';
-            document.body.appendChild(cursor);
-            
-            let mouseX = 0, mouseY = 0;
-            let cursorX = 0, cursorY = 0;
-            
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-            });
-            
-            function updateCursor() {
-                const speed = 0.15;
-                cursorX += (mouseX - cursorX) * speed;
-                cursorY += (mouseY - cursorY) * speed;
-                
-                if (cursor) {
-                    cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
-                }
-                
-                requestAnimationFrame(updateCursor);
-            }
-            
-            updateCursor();
-            
-            // Cursor interactions
-            const interactiveElements = document.querySelectorAll('a, button, .grid-item, .service-card, .exp-item, .edu-item');
-            interactiveElements.forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    if (cursor) cursor.classList.add('cursor-hover');
-                });
-                el.addEventListener('mouseleave', () => {
-                    if (cursor) cursor.classList.remove('cursor-hover');
-                });
-            });
-        }
-        
-        // Initialize modern features after DOM load
-        if (window.innerWidth > 768) {
-            initModernCursor();
-        }
+  // Active nav
+  const navObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
+        const a = document.querySelector('.nav-link[href="#' + e.target.id + '"]');
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { threshold: 0.35 });
+  document.querySelectorAll('section[id]').forEach(s => navObs.observe(s));
 
-    // Navbar animation on page load
-    const navbarHeader = document.querySelector('header');
-    const navLinks = document.querySelectorAll('.nav-links li, .nav-links .btn');
-    
-    // Animate navbar on page load
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.innerHTML = '<i class="fas fa-check" style="font-size:11px;"></i> Message Sent!';
+    btn.style.background = '#00D9A3';
+    btn.disabled = true;
     setTimeout(() => {
-        navbarHeader.classList.add('nav-loaded');
-        
-        navLinks.forEach((link, index) => {
-            setTimeout(() => {
-                link.classList.add('link-loaded');
-            }, index * 100);
-        });
-    }, 200);
+      btn.innerHTML = 'Send Message <i class="fas fa-arrow-right" style="font-size:11px;"></i>';
+      btn.style.background = ''; btn.disabled = false;
+      document.getElementById('contactForm').reset();
+    }, 3500);
+  }
+</script>
 
-        // Throttle function for better scroll performance
-        function throttle(func, limit) {
-            let inThrottle;
-            return function() {
-                const args = arguments;
-                const context = this;
-                if (!inThrottle) {
-                    func.apply(context, args);
-                    inThrottle = true;
-                    setTimeout(() => inThrottle = false, limit);
-                }
-            }
+<!-- ═══ INTERACTIVE LANYARD ═══ -->
+<script>
+window.addEventListener('load', function() {
+  try {
+  if (typeof THREE === 'undefined') { console.error('Lanyard: Three.js not loaded'); return; }
+  const wrapper = document.getElementById('lanyard-canvas');
+  if (!wrapper) { console.error('Lanyard: wrapper not found'); return; }
+
+  // ── Renderer ──
+  const W = wrapper.clientWidth || 380;
+  const H = wrapper.clientHeight || 520;
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setSize(W, H);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.domElement.style.display = 'block';
+  wrapper.appendChild(renderer.domElement);
+
+  // ── Scene / Camera ──
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(20, W / H, 0.1, 100);
+  camera.position.set(0, 0, 20);
+
+  // ── Lights ──
+  scene.add(new THREE.AmbientLight(0xffffff, 1.8));
+  const sun = new THREE.DirectionalLight(0xffffff, 3.5);
+  sun.position.set(3, 5, 6);
+  scene.add(sun);
+  const fill = new THREE.DirectionalLight(0x6c63ff, 1.2);
+  fill.position.set(-4, -2, 2);
+  scene.add(fill);
+
+  // ── Verlet Physics ──
+  const N = 14;           // rope points
+  const SEG = 0.30;       // segment rest length (world units)
+  const GRAV = 0.013;
+  const DAMP = 0.97;
+  const ANCHOR_Y = 3.9;
+  const ANCHOR_X = 0;
+
+  const px = new Float32Array(N);  // current x
+  const py = new Float32Array(N);  // current y
+  const ox = new Float32Array(N);  // previous x
+  const oy = new Float32Array(N);  // previous y
+
+  for (let i = 0; i < N; i++) {
+    px[i] = ox[i] = ANCHOR_X;
+    py[i] = oy[i] = ANCHOR_Y - i * SEG;
+  }
+
+  function stepPhysics() {
+    for (let i = 1; i < N; i++) {
+      const vx = (px[i] - ox[i]) * DAMP;
+      const vy = (py[i] - oy[i]) * DAMP;
+      ox[i] = px[i]; oy[i] = py[i];
+      px[i] += vx;
+      py[i] += vy - GRAV;
+    }
+    for (let iter = 0; iter < 8; iter++) {
+      // pin anchor
+      px[0] = ANCHOR_X; py[0] = ANCHOR_Y;
+      for (let i = 0; i < N - 1; i++) {
+        const dx = px[i+1] - px[i];
+        const dy = py[i+1] - py[i];
+        const dist = Math.sqrt(dx*dx + dy*dy) || 1e-6;
+        const diff = (dist - SEG) / dist * 0.5;
+        if (i > 0) { px[i] += dx * diff; py[i] += dy * diff; }
+        px[i+1] -= dx * diff; py[i+1] -= dy * diff;
+      }
+    }
+  }
+
+  // ── Card Texture ──
+  function makeCardTexture() {
+    const cc = document.createElement('canvas');
+    cc.width = 520; cc.height = 740;
+    const c = cc.getContext('2d');
+
+    // Rounded rect helper
+    function rr(x, y, w, h, r) {
+      c.beginPath();
+      c.moveTo(x+r, y);
+      c.lineTo(x+w-r, y);
+      c.arcTo(x+w, y, x+w, y+r, r);
+      c.lineTo(x+w, y+h-r);
+      c.arcTo(x+w, y+h, x+w-r, y+h, r);
+      c.lineTo(x+r, y+h);
+      c.arcTo(x, y+h, x, y+h-r, r);
+      c.lineTo(x, y+r);
+      c.arcTo(x, y, x+r, y, r);
+      c.closePath();
+    }
+
+    // Background
+    c.fillStyle = '#0D0F12';
+    rr(0, 0, 520, 740, 28); c.fill();
+
+    // Subtle grid lines
+    c.strokeStyle = 'rgba(108,99,255,0.07)';
+    c.lineWidth = 1;
+    for (let y = 0; y < 740; y += 32) {
+      c.beginPath(); c.moveTo(0, y); c.lineTo(520, y); c.stroke();
+    }
+    for (let x = 0; x < 520; x += 32) {
+      c.beginPath(); c.moveTo(x, 0); c.lineTo(x, 740); c.stroke();
+    }
+
+    // Top accent bar
+    const grad = c.createLinearGradient(0, 0, 520, 0);
+    grad.addColorStop(0, '#6C63FF');
+    grad.addColorStop(1, '#00D9A3');
+    c.fillStyle = grad;
+    rr(0, 0, 520, 10, 0); c.fill();
+
+    // Card border
+    c.strokeStyle = 'rgba(108,99,255,0.2)';
+    c.lineWidth = 1.5;
+    rr(1, 1, 518, 738, 27); c.stroke();
+
+    // ORG label
+    c.fillStyle = 'rgba(108,99,255,0.12)';
+    c.fillRect(24, 26, 120, 22);
+    c.fillStyle = '#6C63FF';
+    c.font = '500 11px "JetBrains Mono", monospace';
+    c.textAlign = 'left';
+    c.fillText('CS · AI · PRODUCT', 30, 41);
+
+    // Photo circle
+    c.fillStyle = '#151720';
+    c.beginPath(); c.arc(260, 215, 115, 0, Math.PI * 2); c.fill();
+    // Glowing ring
+    const ringG = c.createRadialGradient(260, 215, 100, 260, 215, 118);
+    ringG.addColorStop(0, 'rgba(108,99,255,0.5)');
+    ringG.addColorStop(1, 'rgba(108,99,255,0)');
+    c.fillStyle = ringG;
+    c.beginPath(); c.arc(260, 215, 118, 0, Math.PI * 2); c.fill();
+    // Inner clip for photo-like silhouette
+    c.fillStyle = '#1E2230';
+    c.beginPath(); c.arc(260, 195, 52, 0, Math.PI * 2); c.fill();
+    c.beginPath();
+    c.arc(260, 330, 88, Math.PI, 0);
+    c.fill();
+    // Monogram fallback
+    c.fillStyle = 'rgba(108,99,255,0.6)';
+    c.font = 'bold 52px Arial';
+    c.textAlign = 'center';
+    c.fillText('S', 260, 212);
+
+    // Name
+    c.fillStyle = '#FFFFFF';
+    c.font = 'bold 46px Arial, sans-serif';
+    c.textAlign = 'center';
+    c.fillText('SKYLAR', 260, 372);
+    c.fillStyle = 'rgba(255,255,255,0.45)';
+    c.font = '22px Arial, sans-serif';
+    c.fillText('Dararithy Heng', 260, 406);
+
+    // Accent divider
+    const divG = c.createLinearGradient(120, 0, 400, 0);
+    divG.addColorStop(0, 'transparent');
+    divG.addColorStop(0.5, '#6C63FF');
+    divG.addColorStop(1, 'transparent');
+    c.strokeStyle = divG;
+    c.lineWidth = 1;
+    c.beginPath(); c.moveTo(120, 424); c.lineTo(400, 424); c.stroke();
+
+    // Role
+    c.fillStyle = '#6C63FF';
+    c.font = '500 18px "JetBrains Mono", monospace';
+    c.fillText('AI Builder · Aspiring PM', 260, 453);
+
+    // Info rows
+    const rows = [
+      ['🎓', 'AUPP + FHSU · Dual Degree'],
+      ['🤖', 'AI Associate · TGI'],
+      ['🌐', 'skylar-thedev.me'],
+    ];
+    c.font = '15px "JetBrains Mono", monospace';
+    rows.forEach(([icon, text], i) => {
+      const y = 498 + i * 34;
+      c.fillStyle = 'rgba(255,255,255,0.3)';
+      c.textAlign = 'left';
+      c.fillText(icon, 80, y);
+      c.fillStyle = 'rgba(255,255,255,0.55)';
+      c.fillText(text, 116, y);
+    });
+
+    // Separator
+    c.strokeStyle = 'rgba(255,255,255,0.06)';
+    c.lineWidth = 1;
+    c.beginPath(); c.moveTo(40, 610); c.lineTo(480, 610); c.stroke();
+
+    // Barcode-style
+    c.textAlign = 'center';
+    c.fillStyle = 'rgba(255,255,255,0.08)';
+    for (let i = 0; i < 28; i++) {
+      const bx = 80 + i * 13;
+      const bh = (i%3===0) ? 38 : (i%2===0 ? 28 : 20);
+      c.fillRect(bx, 622, (i%4<2) ? 7 : 4, bh);
+    }
+    c.fillStyle = 'rgba(255,255,255,0.18)';
+    c.font = '10px monospace';
+    c.fillText('PHNOM PENH · CAMBODIA · 2024', 260, 678);
+
+    // Corner pips
+    c.fillStyle = '#6C63FF';
+    c.beginPath(); c.arc(28, 716, 5, 0, Math.PI*2); c.fill();
+    c.fillStyle = '#00D9A3';
+    c.beginPath(); c.arc(492, 716, 5, 0, Math.PI*2); c.fill();
+
+    return new THREE.CanvasTexture(cc);
+  }
+
+  const cardTex = makeCardTexture();
+
+  // ── Card Mesh ──
+  const cardGeo = new THREE.BoxGeometry(1.55, 2.2, 0.06);
+  const sideMat = new THREE.MeshStandardMaterial({ color: 0x0D0F12, roughness: 0.9 });
+  const frontMat = new THREE.MeshPhysicalMaterial({
+    map: cardTex,
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.08,
+    roughness: 0.55,
+    metalness: 0.05,
+  });
+  const backMat = new THREE.MeshStandardMaterial({ color: 0x0A0B0E, roughness: 0.95 });
+  const card = new THREE.Mesh(cardGeo, [sideMat,sideMat,sideMat,sideMat,frontMat,backMat]);
+  scene.add(card);
+
+  // Clip (metal ring at top of card)
+  const clipM = new THREE.MeshStandardMaterial({ color: 0xC0C0CC, metalness: 0.95, roughness: 0.08 });
+  const clip = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.14, 0.12), clipM);
+  clip.position.set(0, 1.13, 0);
+  card.add(clip);
+
+  // Anchor point visual
+  const anchor = new THREE.Mesh(
+    new THREE.SphereGeometry(0.055, 12, 8),
+    new THREE.MeshStandardMaterial({ color: 0xC0C0CC, metalness: 0.9, roughness: 0.1 })
+  );
+  anchor.position.set(ANCHOR_X, ANCHOR_Y, 0);
+  scene.add(anchor);
+
+  // ── Lanyard Strip (cylinder segments) ──
+  function makeLanyardTex() {
+    const lc = document.createElement('canvas');
+    lc.width = 64; lc.height = 256;
+    const lt = lc.getContext('2d');
+    // Base gradient
+    const g = lt.createLinearGradient(0, 0, 64, 0);
+    g.addColorStop(0, '#3B35B0');
+    g.addColorStop(0.5, '#6C63FF');
+    g.addColorStop(1, '#3B35B0');
+    lt.fillStyle = g;
+    lt.fillRect(0, 0, 64, 256);
+    // Diagonal stripe pattern
+    lt.strokeStyle = 'rgba(255,255,255,0.12)';
+    lt.lineWidth = 8;
+    for (let y = -128; y < 384; y += 24) {
+      lt.beginPath(); lt.moveTo(0, y); lt.lineTo(64, y + 64); lt.stroke();
+    }
+    // Edge highlights
+    lt.fillStyle = 'rgba(255,255,255,0.08)';
+    lt.fillRect(0, 0, 4, 256);
+    lt.fillRect(60, 0, 4, 256);
+    const t = new THREE.CanvasTexture(lc);
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    return t;
+  }
+
+  const lanyardTex = makeLanyardTex();
+  const segMat = new THREE.MeshStandardMaterial({
+    map: lanyardTex,
+    roughness: 0.75,
+    metalness: 0.05,
+    side: THREE.DoubleSide,
+  });
+
+  const segs = [];
+  for (let i = 0; i < N - 1; i++) {
+    const geo = new THREE.CylinderGeometry(0.032, 0.032, 1, 7);
+    const m = new THREE.Mesh(geo, segMat);
+    scene.add(m);
+    segs.push(m);
+  }
+
+  function updateRope() {
+    for (let i = 0; i < N - 1; i++) {
+      const ax = px[i], ay = py[i];
+      const bx = px[i+1], by = py[i+1];
+      const mx = (ax+bx)*0.5, my = (ay+by)*0.5;
+      const dx = bx - ax, dy = by - ay;
+      const len = Math.sqrt(dx*dx + dy*dy);
+      segs[i].position.set(mx, my, 0);
+      segs[i].rotation.z = -Math.atan2(dx, dy);
+      segs[i].scale.y = len / 1;
+    }
+  }
+
+  // ── Drag ──
+  let dragging = false;
+  let offX = 0, offY = 0;
+
+  function toWorld(cx, cy) {
+    const r = renderer.domElement.getBoundingClientRect();
+    const nx = ((cx - r.left) / r.width) * 2 - 1;
+    const ny = -((cy - r.top) / r.height) * 2 + 1;
+    const v = new THREE.Vector3(nx, ny, 0.5).unproject(camera);
+    const d = v.sub(camera.position).normalize();
+    const t = -camera.position.z / d.z;
+    const p = camera.position.clone().addScaledVector(d, t);
+    return { x: p.x, y: p.y };
+  }
+
+  renderer.domElement.style.cursor = 'grab';
+  renderer.domElement.style.touchAction = 'none';
+
+  renderer.domElement.addEventListener('pointerdown', e => {
+    const wp = toWorld(e.clientX, e.clientY);
+    // Hit-test card (last physics point = card center)
+    const cx = px[N-1], cy = py[N-1] - 0.8;
+    const dx = wp.x - cx, dy = wp.y - cy;
+    if (Math.abs(dx) < 1.0 && Math.abs(dy) < 1.3) {
+      dragging = true;
+      offX = dx; offY = dy;
+      renderer.domElement.setPointerCapture(e.pointerId);
+      renderer.domElement.style.cursor = 'grabbing';
+    }
+  });
+
+  renderer.domElement.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    const wp = toWorld(e.clientX, e.clientY);
+    const tx = wp.x - offX + 0.8; // account for card offset
+    const ty = wp.y - offY + 0.8;
+    px[N-1] = tx; py[N-1] = ty;
+    ox[N-1] = tx; oy[N-1] = ty;
+  });
+
+  renderer.domElement.addEventListener('pointerup', e => {
+    dragging = false;
+    renderer.domElement.releasePointerCapture(e.pointerId);
+    renderer.domElement.style.cursor = 'grab';
+  });
+
+  // ── Animate ──
+  let time = 0;
+  const cardRot = { z: 0, x: 0.06 };
+
+  function animate() {
+    requestAnimationFrame(animate);
+    time += 0.016;
+
+    if (dragging) {
+      // Simulate rope only (card is kinematic)
+      for (let i = 1; i < N - 1; i++) {
+        const vx = (px[i] - ox[i]) * DAMP;
+        const vy = (py[i] - oy[i]) * DAMP;
+        ox[i] = px[i]; oy[i] = py[i];
+        px[i] += vx; py[i] += vy - GRAV;
+      }
+      // Constraints keeping card pinned to dragged pos
+      for (let iter = 0; iter < 8; iter++) {
+        px[0] = ANCHOR_X; py[0] = ANCHOR_Y;
+        for (let i = 0; i < N - 2; i++) {
+          const dx = px[i+1] - px[i], dy = py[i+1] - py[i];
+          const dist = Math.sqrt(dx*dx + dy*dy) || 1e-6;
+          const diff = (dist - SEG) / dist * 0.5;
+          if (i > 0) { px[i] += dx * diff; py[i] += dy * diff; }
+          px[i+1] -= dx * diff; py[i+1] -= dy * diff;
         }
+      }
+    } else {
+      stepPhysics();
+      // Gentle idle sway at anchor
+      const sway = Math.sin(time * 0.4) * 0.03;
+      px[0] = ANCHOR_X + sway;
+    }
 
-        // Optimized navbar scroll effect with requestAnimationFrame
-        let isScrolling = false;
-        
-        function updateNavbar() {
-            if (window.scrollY > 100) {
-                navbarHeader.classList.add('nav-scrolled');
-            } else {
-                navbarHeader.classList.remove('nav-scrolled');
-            }
-            isScrolling = false;
-        }
+    updateRope();
 
-        window.addEventListener('scroll', throttle(() => {
-            if (!isScrolling) {
-                requestAnimationFrame(updateNavbar);
-                isScrolling = true;
-            }
-        }, 16), { passive: true }); // 60fps throttling
+    // Position + tilt card
+    const lx = px[N-1], ly = py[N-1];
+    const plx = px[N-2], ply = py[N-2];
+    card.position.set(lx, ly - 0.8, 0);
 
-        // Remove redundant item observer as it's now handled by the main scrollObserver
-        // Optimized skills progress bar animation
-        const skillsSectionForProgress = document.getElementById('Skills');
-        if (skillsSectionForProgress) {
-            const skillsProgressObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Delay progress bars slightly after skill items animate
-                        setTimeout(() => {
-                            const progressBars = document.querySelectorAll('.progress-bar');
-                            progressBars.forEach((bar, index) => {
-                                setTimeout(() => {
-                                    const progress = bar.getAttribute('data-progress');
-                                    bar.style.setProperty('--progress', progress + '%');
-                                    bar.classList.add('animate');
-                                }, index * 100);
-                            });
-                        }, 500);
-                        skillsProgressObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-            
-            skillsProgressObserver.observe(skillsSectionForProgress);
-        }
+    const angle = Math.atan2(lx - plx, ply - ly);
+    cardRot.z = THREE.MathUtils.lerp(cardRot.z, -angle * 0.7, 0.12);
+    card.rotation.z = cardRot.z;
+    card.rotation.x = THREE.MathUtils.lerp(card.rotation.x, cardRot.x, 0.05);
 
-        let navbar = document.querySelector(".nav-links")
-        let humbergur = document.querySelector(".humburger")
-        let icons = document.querySelectorAll("i")
+    renderer.render(scene, camera);
+  }
+  animate();
 
-        humbergur.addEventListener('click', function(event) {
-            let isvible = navbar.getAttribute('data-visible');
-            if (isvible == 'true') {
-                navbar.setAttribute('data-visible', 'false');
-                icons[0].setAttribute('data-visible', 'true');
-                icons[1].setAttribute('data-visible', 'false')
-            } else {
-                navbar.setAttribute('data-visible', 'true');
-                icons[0].setAttribute('data-visible', 'false');
-                icons[1].setAttribute('data-visible', 'true')
-            }
-        })
+  // Resize
+  new ResizeObserver(() => {
+    const nw = wrapper.clientWidth || 380;
+    const nh = wrapper.clientHeight || 520;
+    camera.aspect = nw / nh;
+    camera.updateProjectionMatrix();
+    renderer.setSize(nw, nh);
+  }).observe(wrapper);
 
-        // Smooth scrolling for navbar links
-        document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').slice(1);
-                const targetSection = document.getElementById(targetId);
-                if (targetSection) {
-                    targetSection.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-
-        // Experience accordion functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const expItems = document.querySelectorAll('.exp-item');
-            
-            expItems.forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    const expDetails = this.querySelector('.exp-details');
-                    const toggleIcon = this.querySelector('.toggle-indicator i');
-                    const isCurrentlyExpanded = expDetails.classList.contains('expanded');
-                    
-                    console.log('Clicked item:', this.querySelector('h6').textContent);
-                    console.log('Currently expanded:', isCurrentlyExpanded);
-                    
-                    // Close all items first
-                    expItems.forEach(otherItem => {
-                        const otherDetails = otherItem.querySelector('.exp-details');
-                        const otherIcon = otherItem.querySelector('.toggle-indicator i');
-                        
-                        if (otherDetails.classList.contains('expanded')) {
-                            otherDetails.classList.remove('expanded');
-                            otherIcon.classList.remove('fa-minus');
-                            otherIcon.classList.add('fa-plus');
-                            otherItem.classList.remove('active');
-                        }
-                    });
-                    
-                    // If the clicked item wasn't expanded, open it
-                    if (!isCurrentlyExpanded) {
-                        expDetails.classList.add('expanded');
-                        toggleIcon.classList.remove('fa-plus');
-                        toggleIcon.classList.add('fa-minus');
-                        this.classList.add('active');
-                    }
-                });
-            });
-        });
-
-        // Toggle individual job details (legacy function - keeping for compatibility)
-        function toggleJobDetails(expItem) {
-            // This function is now handled by the event listener above
-            console.log('Legacy function called - should not happen');
-        }
-
-        // Optimized Scroll Progress Bar with requestAnimationFrame
-        document.addEventListener('DOMContentLoaded', function() {
-            // Main initialization code starts here
-        let scrollProgressRAF = false;
-        
-        function updateScrollProgress() {
-            const scrollProgress = document.querySelector('.scroll-progress');
-            const scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = (window.scrollY / scrollTotal) * 100;
-            scrollProgress.style.width = scrollPercent + '%';
-            scrollProgressRAF = false;
-        }
-
-        window.addEventListener('scroll', () => {
-            if (!scrollProgressRAF) {
-                requestAnimationFrame(updateScrollProgress);
-                scrollProgressRAF = true;
-            }
-        }, { passive: true });
-
-        // Dark Mode Toggle
-        const themeToggleBtn = document.getElementById('theme-toggle-btn');
-        const themeIcon = themeToggleBtn.querySelector('i');
-        
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
-        }
-
-        themeToggleBtn.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            
-            if (document.body.classList.contains('dark-mode')) {
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-                localStorage.setItem('theme', 'light');
-            }
-        });
-
-        // Typing Animation
-        const typingText = document.getElementById('typing-text');
-        const texts = ['Product Manager', 'AI Developer', 'Full Stack Developer', 'Tech Enthusiast'];
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-
-        function typeWriter() {
-            const currentText = texts[textIndex];
-            
-            if (isDeleting) {
-                typingText.textContent = currentText.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typingText.textContent = currentText.substring(0, charIndex + 1);
-                charIndex++;
-            }
-            
-            if (!isDeleting && charIndex === currentText.length) {
-                setTimeout(() => isDeleting = true, 2000);
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                textIndex = (textIndex + 1) % texts.length;
-            }
-            
-            const typingSpeed = isDeleting ? 50 : 100;
-            setTimeout(typeWriter, typingSpeed);
-        }
-
-        // Start typing animation
-        setTimeout(typeWriter, 1000);
-        
-        // Add reduced motion support
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            document.body.classList.add('reduce-motion');
-        }
-        
-        // Modern scroll restoration
-        if ('scrollRestoration' in history) {
-            history.scrollRestoration = 'manual';
-        }
-        
-        console.log('🚀 Modern portfolio animation system initialized!');
-    }); // Closes DOMContentLoaded event listener
-
-    // Passive scroll listener for performance
-    window.addEventListener('scroll', () => {
-        // Handle any additional scroll-based animations here
-    }, { passive: true });
-
-    // Resize handler for responsive animations
-    window.addEventListener('resize', () => {
-        // Update animation parameters based on screen size
-        const isMobile = window.innerWidth <= 768;
-        if (typeof cursor !== 'undefined' && cursor) {
-            if (isMobile) {
-                cursor.style.display = 'none';
-            } else {
-                cursor.style.display = 'block';
-            }
-        }
-    }, { passive: true });
-
-    // Passive scroll listener for performance
-    window.addEventListener('scroll', () => {
-        // Handle any additional scroll-based animations here
-    }, { passive: true });
-
-    // Resize handler for responsive animations
-    window.addEventListener('resize', () => {
-        // Update animation parameters based on screen size
-        const isMobile = window.innerWidth <= 768;
-        if (typeof cursor !== 'undefined' && cursor) {
-            if (isMobile) {
-                cursor.style.display = 'none';
-            } else {
-                cursor.style.display = 'block';
-            }
-        }
-    }, { passive: true });
-
-    </script>
-    
-    <!-- Floating Contact Button -->
-    <div class="floating-contact" onclick="window.open('https://api.whatsapp.com/send/?phone=252619171882&text&type=phone_number&app_absent=0', '_blank')">
-        <i class="fab fa-whatsapp"></i>
-    </div>
+  // Hint label
+  const hint = document.createElement('div');
+  hint.textContent = 'drag me';
+  hint.style.cssText = 'position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-family:"JetBrains Mono",monospace;font-size:10px;color:rgba(108,99,255,0.5);letter-spacing:0.12em;text-transform:uppercase;pointer-events:none;';
+  wrapper.appendChild(hint);
+  // fade out after 3s
+  setTimeout(() => { hint.style.transition = 'opacity 1s'; hint.style.opacity = '0'; }, 3000);
+  } catch(e) { console.error('Lanyard error:', e); }
+});
+</script>
 </body>
 </html>
