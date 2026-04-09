@@ -29,13 +29,17 @@ try {
 
   // ── Verlet Physics ──
   const N = 20;
-  const SEG = 0.29;
+  const SEG = 0.2;
   const GRAV = 0.0105;
   const DAMP = 0.987;
   const SOLVER_ITERS = 12;
   const ANCHOR_Y = 5.55;
   const ANCHOR_X = 0;
-  const CARD_OFFSET_Y = 0.46;
+  const CARD_HEIGHT = 2.2;
+  const CARD_DEPTH = 0.06;
+  const CARD_SCALE = 1.65;
+  const HOOK_LOCAL_Y = (CARD_HEIGHT * 0.5) + 0.08;
+  const CARD_OFFSET_Y = HOOK_LOCAL_Y * CARD_SCALE;
 
   const px = new Float32Array(N);
   const py = new Float32Array(N);
@@ -83,132 +87,52 @@ try {
     }
   }
 
-  // ── Card Texture ──
-  function makeCardTexture() {
-    const cc = document.createElement('canvas');
-    cc.width = 520; cc.height = 740;
-    const c = cc.getContext('2d');
+  // ── Card Textures (uploaded assets) ──
+  let cardAspect = 331 / 538;
+  let card;
 
-    function rr(x, y, w, h, r) {
-      c.beginPath();
-      c.moveTo(x+r, y); c.lineTo(x+w-r, y);
-      c.arcTo(x+w, y, x+w, y+r, r); c.lineTo(x+w, y+h-r);
-      c.arcTo(x+w, y+h, x+w-r, y+h, r); c.lineTo(x+r, y+h);
-      c.arcTo(x, y+h, x, y+h-r, r); c.lineTo(x, y+r);
-      c.arcTo(x, y, x+r, y, r); c.closePath();
+  function applyCardAspect(width, height) {
+    if (!width || !height) return;
+    cardAspect = width / height;
+    if (card) {
+      card.geometry.dispose();
+      card.geometry = new THREE.BoxGeometry(CARD_HEIGHT * cardAspect, CARD_HEIGHT, CARD_DEPTH);
     }
-
-    c.fillStyle = '#0D0F12';
-    rr(0, 0, 520, 740, 28); c.fill();
-
-    c.strokeStyle = 'rgba(108,99,255,0.07)'; c.lineWidth = 1;
-    for (let y = 0; y < 740; y += 32) { c.beginPath(); c.moveTo(0,y); c.lineTo(520,y); c.stroke(); }
-    for (let x = 0; x < 520; x += 32) { c.beginPath(); c.moveTo(x,0); c.lineTo(x,740); c.stroke(); }
-
-    const grad = c.createLinearGradient(0, 0, 520, 0);
-    grad.addColorStop(0, '#6C63FF'); grad.addColorStop(1, '#00D9A3');
-    c.fillStyle = grad;
-    rr(0, 0, 520, 10, 0); c.fill();
-
-    c.strokeStyle = 'rgba(108,99,255,0.2)'; c.lineWidth = 1.5;
-    rr(1, 1, 518, 738, 27); c.stroke();
-
-    c.fillStyle = 'rgba(108,99,255,0.12)';
-    c.fillRect(24, 26, 120, 22);
-    c.fillStyle = '#6C63FF';
-    c.font = '500 11px "JetBrains Mono", monospace';
-    c.textAlign = 'left';
-    c.fillText('CS · AI · PRODUCT', 30, 41);
-
-    c.fillStyle = '#151720';
-    c.beginPath(); c.arc(260, 215, 115, 0, Math.PI*2); c.fill();
-    const ringG = c.createRadialGradient(260, 215, 100, 260, 215, 118);
-    ringG.addColorStop(0, 'rgba(108,99,255,0.5)'); ringG.addColorStop(1, 'rgba(108,99,255,0)');
-    c.fillStyle = ringG;
-    c.beginPath(); c.arc(260, 215, 118, 0, Math.PI*2); c.fill();
-    c.fillStyle = '#1E2230';
-    c.beginPath(); c.arc(260, 195, 52, 0, Math.PI*2); c.fill();
-    c.beginPath(); c.arc(260, 330, 88, Math.PI, 0); c.fill();
-    c.fillStyle = 'rgba(108,99,255,0.6)';
-    c.font = 'bold 52px Arial'; c.textAlign = 'center';
-    c.fillText('S', 260, 212);
-
-    c.fillStyle = '#FFFFFF';
-    c.font = 'bold 46px Arial, sans-serif'; c.textAlign = 'center';
-    c.fillText('SKYLAR', 260, 372);
-    c.fillStyle = 'rgba(255,255,255,0.45)';
-    c.font = '22px Arial, sans-serif';
-    c.fillText('Dararithy Heng', 260, 406);
-
-    const divG = c.createLinearGradient(120, 0, 400, 0);
-    divG.addColorStop(0, 'transparent'); divG.addColorStop(0.5, '#6C63FF'); divG.addColorStop(1, 'transparent');
-    c.strokeStyle = divG; c.lineWidth = 1;
-    c.beginPath(); c.moveTo(120, 424); c.lineTo(400, 424); c.stroke();
-
-    c.fillStyle = '#6C63FF';
-    c.font = '500 18px "JetBrains Mono", monospace';
-    c.fillText('AI Builder · Aspiring PM', 260, 453);
-
-    const rows = [['🎓','AUPP + FHSU · Dual Degree'],['🤖','AI Associate · TGI'],['🌐','skylar-thedev.me']];
-    c.font = '15px "JetBrains Mono", monospace';
-    rows.forEach(([icon, text], i) => {
-      const ry = 498 + i * 34;
-      c.fillStyle = 'rgba(255,255,255,0.3)'; c.textAlign = 'left'; c.fillText(icon, 80, ry);
-      c.fillStyle = 'rgba(255,255,255,0.55)'; c.fillText(text, 116, ry);
-    });
-
-    c.strokeStyle = 'rgba(255,255,255,0.06)'; c.lineWidth = 1;
-    c.beginPath(); c.moveTo(40, 610); c.lineTo(480, 610); c.stroke();
-
-    c.textAlign = 'center'; c.fillStyle = 'rgba(255,255,255,0.08)';
-    for (let i = 0; i < 28; i++) {
-      const bx = 80 + i * 13;
-      const bh = (i%3===0) ? 38 : (i%2===0 ? 28 : 20);
-      c.fillRect(bx, 622, (i%4<2) ? 7 : 4, bh);
-    }
-    c.fillStyle = 'rgba(255,255,255,0.18)'; c.font = '10px monospace';
-    c.fillText('PHNOM PENH · CAMBODIA · 2025', 260, 678);
-
-    c.fillStyle = '#6C63FF'; c.beginPath(); c.arc(28, 716, 5, 0, Math.PI*2); c.fill();
-    c.fillStyle = '#00D9A3'; c.beginPath(); c.arc(492, 716, 5, 0, Math.PI*2); c.fill();
-
-    return new THREE.CanvasTexture(cc);
   }
 
-  const cardTex = makeCardTexture();
+  function onCardTextureLoad(tex) {
+    const img = tex.image;
+    applyCardAspect(img?.width, img?.height);
+  }
+
+  const textureLoader = new THREE.TextureLoader();
+  const frontCardUrl = new URL('../images/cards/Front.png', import.meta.url).href;
+  const backCardUrl = new URL('../images/cards/Back.png', import.meta.url).href;
+  const frontTex = textureLoader.load(frontCardUrl, onCardTextureLoad);
+  const backTex = textureLoader.load(backCardUrl, onCardTextureLoad);
+  frontTex.colorSpace = THREE.SRGBColorSpace;
+  backTex.colorSpace = THREE.SRGBColorSpace;
+  frontTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  backTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
 
   // ── Card Mesh ──
-  const cardGeo = new THREE.BoxGeometry(1.55, 2.2, 0.06);
+  const cardGeo = new THREE.BoxGeometry(CARD_HEIGHT * cardAspect, CARD_HEIGHT, CARD_DEPTH);
   const sideMat = new THREE.MeshStandardMaterial({ color: 0x0D0F12, roughness: 0.9 });
   const frontMat = new THREE.MeshPhysicalMaterial({
-    map: cardTex, clearcoat: 1.0, clearcoatRoughness: 0.08, roughness: 0.55, metalness: 0.05,
+    map: frontTex, clearcoat: 0.95, clearcoatRoughness: 0.1, roughness: 0.5, metalness: 0.04,
   });
-  const backMat = new THREE.MeshStandardMaterial({ color: 0x0A0B0E, roughness: 0.95 });
-  const card = new THREE.Mesh(cardGeo, [sideMat,sideMat,sideMat,sideMat,frontMat,backMat]);
-  card.scale.setScalar(1.4);
+  const backMat = new THREE.MeshPhysicalMaterial({
+    map: backTex, clearcoat: 0.95, clearcoatRoughness: 0.1, roughness: 0.5, metalness: 0.04,
+  });
+  card = new THREE.Mesh(cardGeo, [sideMat,sideMat,sideMat,sideMat,frontMat,backMat]);
+  card.scale.setScalar(CARD_SCALE);
   scene.add(card);
 
-  // ── Hardware ──
+  // ── Hook ──
   const ringMat = new THREE.MeshStandardMaterial({ color: 0xC8C2B8, metalness: 0.95, roughness: 0.12 });
   const ring = new THREE.Mesh(new THREE.TorusGeometry(0.17, 0.038, 20, 48), ringMat);
-  ring.position.set(0, 1.21, 0.02);
+  ring.position.set(0, HOOK_LOCAL_Y, 0.02);
   card.add(ring);
-
-  const clipMat = new THREE.MeshStandardMaterial({ color: 0xB0A898, metalness: 0.92, roughness: 0.14 });
-  const clipBody = new THREE.Mesh(new THREE.TorusGeometry(0.13, 0.028, 12, 32, Math.PI), clipMat);
-  clipBody.rotation.z = Math.PI / 2;
-  clipBody.position.set(0, 1.02, 0.02);
-  card.add(clipBody);
-  const clipBar = new THREE.Mesh(new THREE.CylinderGeometry(0.028, 0.028, 0.26, 10), clipMat);
-  clipBar.position.set(0, 1.02, 0.02);
-  card.add(clipBar);
-
-  const tether = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.028, 0.034, 0.5, 10),
-    new THREE.MeshStandardMaterial({ color: 0x0A0A0A, roughness: 0.6, metalness: 0.05 })
-  );
-  tether.position.set(0, 1.5, 0);
-  scene.add(tether);
 
   const anchorMat = new THREE.MeshStandardMaterial({ color: 0xD0CBBD, metalness: 0.95, roughness: 0.1 });
   const anchor = new THREE.Mesh(new THREE.SphereGeometry(0.06, 14, 10), anchorMat);
@@ -309,8 +233,6 @@ try {
       segs[i].rotation.z = -Math.atan2(dx, dy);
       segs[i].scale.y = len;
     }
-    tether.position.set(lpx[N - 1], lpy[N - 1] + 0.33, 0);
-    tether.rotation.z = -Math.atan2(lpx[N - 1] - lpx[N - 2], lpy[N - 2] - lpy[N - 1]);
   }
 
   // ── Drag ──
@@ -335,7 +257,9 @@ try {
     const wp = toWorld(e.clientX, e.clientY);
     const cx = px[N-1], cy = py[N-1] - CARD_OFFSET_Y;
     const dx = wp.x - cx, dy = wp.y - cy;
-    if (Math.abs(dx) < 1.0 && Math.abs(dy) < 1.3) {
+    const halfW = (card.geometry.parameters.width * card.scale.x) * 0.52;
+    const halfH = (card.geometry.parameters.height * card.scale.y) * 0.55;
+    if (Math.abs(dx) < halfW && Math.abs(dy) < halfH) {
       dragging = true; offX = dx; offY = dy;
       renderer.domElement.setPointerCapture(e.pointerId);
       renderer.domElement.style.cursor = 'grabbing';
@@ -402,7 +326,8 @@ try {
     const angle = Math.atan2(cx - pcx, pcy - cy);
     const idleZ = dragging ? 0 : Math.sin(time * 0.9) * 0.045;
     const idleX = dragging ? 0.06 : 0.09 + Math.cos(time * 0.62) * 0.012;
-    const targetY = dragging ? 0 : Math.sin(time * 0.48) * 0.08;
+    // Rotate far enough on Y so both card faces become visible during idle motion.
+    const targetY = dragging ? cardRot.y * 0.9 : Math.sin(time * 0.34) * 2.95;
 
     cardRot.z = THREE.MathUtils.lerp(cardRot.z, (-angle * 0.58) + idleZ, 0.08);
     cardRot.x = THREE.MathUtils.lerp(cardRot.x, idleX, 0.03);
