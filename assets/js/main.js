@@ -26,7 +26,7 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 // ── Typing effect ──
-const roles = ['AI Enthusiast', 'Product Builder', 'CS Student', 'Coffee-Powered Coder', 'Hackathon Organizer'];
+const roles = ['Aspiring PM', 'UX/UI Designer', 'Product Thinker', 'CS Student', 'Builder in SEA'];
 let rIdx = 0, cIdx = 0, del = false;
 const typEl = document.getElementById('typing-text');
 function type() {
