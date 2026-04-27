@@ -128,3 +128,44 @@ async function handleSubmit(e) {
     }, 3500);
   }
 }
+
+// ── Custom Cursor ──
+const cur     = document.getElementById('cursor');
+const scanner = document.getElementById('card-scanner');
+
+// Follow mouse with zero lag
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top  = e.clientY + 'px';
+  cur.classList.add('active');
+});
+document.addEventListener('mouseleave', () => cur.classList.remove('active'));
+document.addEventListener('mouseenter', () => cur.classList.add('active'));
+
+// Links & buttons → accent state
+document.querySelectorAll('a, button, [onclick], label, input, textarea, select').forEach(el => {
+  el.addEventListener('mouseenter', () => { cur.classList.add('on-link'); cur.classList.remove('on-card'); });
+  el.addEventListener('mouseleave', () => cur.classList.remove('on-link'));
+});
+
+// Cards + CTAs + social icons → scanner overlay
+document.querySelectorAll('.card, .blog-card, .btn-primary, .btn-secondary, .social-icon').forEach(card => {
+  const snap = () => {
+    const r = card.getBoundingClientRect();
+    scanner.style.left   = r.left   + 'px';
+    scanner.style.top    = r.top    + 'px';
+    scanner.style.width  = r.width  + 'px';
+    scanner.style.height = r.height + 'px';
+  };
+  card.addEventListener('mouseenter', () => {
+    snap();
+    scanner.classList.add('active');
+    cur.classList.add('on-card');
+    cur.classList.remove('on-link');
+  });
+  card.addEventListener('mousemove', () => { if (scanner.classList.contains('active')) snap(); });
+  card.addEventListener('mouseleave', () => {
+    scanner.classList.remove('active');
+    cur.classList.remove('on-card');
+  });
+});

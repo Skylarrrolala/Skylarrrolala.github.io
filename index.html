@@ -34,6 +34,22 @@
 </head>
 <body>
 
+<!-- Custom cursor -->
+<div id="cursor">
+  <div class="c-corner c-tl"></div>
+  <div class="c-corner c-tr"></div>
+  <div class="c-corner c-bl"></div>
+  <div class="c-corner c-br"></div>
+  <div class="c-dot"></div>
+</div>
+<div id="card-scanner">
+  <div class="cs-corner cs-tl"></div>
+  <div class="cs-corner cs-tr"></div>
+  <div class="cs-corner cs-bl"></div>
+  <div class="cs-corner cs-br"></div>
+  <div class="cs-scan"></div>
+</div>
+
 <div id="scroll-progress"></div>
 
 <!-- NAV -->
@@ -42,7 +58,7 @@
     <a href="#" style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;letter-spacing:0.15em;text-decoration:none;color:#fff;">
       SKY<span style="color:#6C63FF;">LAR</span><span style="color:#8B8D91;">_</span>
     </a>
-    <div class="desktop-nav" style="display:flex;align-items:center;gap:32px;">
+    <div class="desktop-nav" style="align-items:center;gap:32px;">
       <a href="#about"    class="nav-link">About</a>
       <a href="#edu"      class="nav-link">Education</a>
       <a href="#skills"   class="nav-link">Skills</a>
@@ -57,7 +73,7 @@
 </header>
 
 <!-- Mobile drawer -->
-<div class="mobile-menu mobile-only" id="mobileMenu" style="position:fixed;top:0;right:0;bottom:0;z-index:200;width:280px;background:#111214;border-left:1px solid #1E2024;padding:24px;display:flex;flex-direction:column;">
+<div class="mobile-menu mobile-only" id="mobileMenu" style="position:fixed;top:0;right:0;bottom:0;z-index:200;width:280px;background:#111214;border-left:1px solid #1E2024;padding:24px;">
   <button id="menuClose" aria-label="Close" style="align-self:flex-end;background:none;border:none;color:#8B8D91;font-size:20px;cursor:pointer;margin-bottom:32px;">
     <i class="fas fa-xmark"></i>
   </button>
@@ -83,7 +99,7 @@
   <div class="float-a" id="shape1" style="position:absolute;top:120px;right:80px;width:120px;height:120px;border:1px solid rgba(108,99,255,0.12);"></div>
   <div class="float-b" id="shape2" style="position:absolute;bottom:140px;left:60px;width:64px;height:64px;border:1px solid rgba(0,217,163,0.1);"></div>
 
-  <div style="max-width:1152px;margin:0 auto;padding:96px 24px;width:100%;position:relative;z-index:10;">
+  <div style="max-width:1152px;margin:0 auto;padding:48px 24px 96px;width:100%;position:relative;z-index:10;">
     <div id="heroGrid" style="display:grid;gap:40px;align-items:center;">
 
       <!-- Text -->
@@ -106,11 +122,17 @@
           <span class="cursor-blink"></span>
         </div>
 
-        <p class="fade-in" style="animation-delay:0.42s;color:#8B8D91;line-height:1.75;max-width:520px;margin-bottom:36px;font-size:15px;">
-          CS student with hands-on experience in project coordination, digital strategy, and cross-functional collaboration. Aspiring Product Manager passionate about building impactful solutions, aligning teams, and turning ideas into scalable outcomes. Coffee keeps the ideas flowing.
+        <p class="fade-in" style="animation-delay:0.42s;color:#8B8D91;line-height:1.75;max-width:520px;margin-bottom:12px;font-size:15px;">
+          I build and scale ideas at the intersection of AI, product, and strategy.
+        </p>
+        <p class="fade-in" style="animation-delay:0.48s;color:#8B8D91;line-height:1.75;max-width:520px;margin-bottom:12px;font-size:15px;">
+          From organizing hackathons to developing ML-driven projects, I focus on solving real problems — not just writing code. I care about understanding users, aligning teams, and turning ideas into things people actually use.
+        </p>
+        <p class="fade-in" style="animation-delay:0.54s;color:rgba(255,255,255,0.45);line-height:1.75;max-width:520px;margin-bottom:36px;font-size:14px;font-style:italic;">
+          Currently exploring AI systems, product thinking, and how to ship fast without losing direction.
         </p>
 
-        <div class="fade-in" style="animation-delay:0.54s;display:flex;flex-wrap:wrap;gap:14px;margin-bottom:36px;">
+        <div class="fade-in" style="animation-delay:0.62s;display:flex;flex-wrap:wrap;gap:14px;margin-bottom:36px;">
           <a href="#projects" class="btn-primary">View My Work <i class="fas fa-arrow-right" style="font-size:11px;"></i></a>
           <a href="#contact"  class="btn-secondary">Let's Talk <i class="fas fa-arrow-up-right-from-square" style="font-size:11px;"></i></a>
         </div>
@@ -150,16 +172,16 @@
     <div id="aboutGrid" style="display:grid;gap:48px;">
       <div class="reveal">
         <p style="font-size:1.05rem;color:rgba(255,255,255,0.82);line-height:1.85;margin-bottom:20px;">
-          I'm <strong style="color:#fff;">Dararithy Heng</strong>, a computer science student passionate about AI, coding, and building products that make an impact.
+          I'm <strong style="color:#fff;">Skylar</strong> — a CS student who ships ML tools, runs programs for hundreds of students, and thinks about products the way engineers think about systems: what's the problem, who has it, and what's the smallest thing that actually works.
         </p>
         <p style="color:#8B8D91;line-height:1.85;margin-bottom:32px;">
-          I love combining technology with business and marketing to create solutions that people actually want to use. Outside of coding, I enjoy exploring new ideas, organizing hackathons, and learning everything I can about tech and product design.
+          I don't wait for the right moment to start. I built a receipt OCR app, trained a sales forecasting model with 43 engineered features, and co-launched a youth tech incubation program — all while studying across three concurrent programs on a full scholarship. I treat every project like it has a real user waiting on the other end.
         </p>
         <div style="display:flex;flex-wrap:wrap;gap:8px;">
-          <span class="tag-chip">Aspiring PM</span>
           <span class="tag-chip">AI &amp; ML</span>
           <span class="tag-chip">Product Builder</span>
-          <span class="tag-chip">Digital Strategist</span>
+          <span class="tag-chip">ML Engineering</span>
+          <span class="tag-chip">Program Design</span>
           <span class="tag-chip">Hackathon Organizer</span>
         </div>
       </div>
@@ -169,21 +191,21 @@
           <div style="flex-shrink:0;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(108,99,255,0.3);color:#6C63FF;font-size:14px;"><i class="fas fa-code"></i></div>
           <div>
             <h3 style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Development</h3>
-            <p style="color:#8B8D91;font-size:13.5px;line-height:1.7;">Full-stack web development using React, Node.js, and MongoDB — from concept to deployment with clean code and optimal performance.</p>
+            <p style="color:#8B8D91;font-size:13.5px;line-height:1.7;">Python, OCR pipelines, Streamlit dashboards — I build tools that turn messy data into decisions. Shipped a receipt scanner and a sales forecasting model with real accuracy metrics. Currently learning PyTorch and ML deployment.</p>
           </div>
         </div>
         <div class="card" style="padding:24px;display:flex;gap:18px;align-items:flex-start;">
           <div style="flex-shrink:0;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(0,217,163,0.3);color:#00D9A3;font-size:14px;"><i class="fas fa-palette"></i></div>
           <div>
             <h3 style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Design</h3>
-            <p style="color:#8B8D91;font-size:13.5px;line-height:1.7;">User-centered UI/UX design combining aesthetic appeal with functional usability to deliver experiences people love.</p>
+            <p style="color:#8B8D91;font-size:13.5px;line-height:1.7;">Figma for wireframes, Tailwind for production. I prototype fast, test with real constraints, and cut features that don't earn their place. Design is how I think before I code.</p>
           </div>
         </div>
         <div class="card" style="padding:24px;display:flex;gap:18px;align-items:flex-start;">
           <div style="flex-shrink:0;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(108,99,255,0.3);color:#6C63FF;font-size:14px;"><i class="fas fa-chart-line"></i></div>
           <div>
             <h3 style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Strategy</h3>
-            <p style="color:#8B8D91;font-size:13.5px;line-height:1.7;">Digital marketing and communications strategy to grow communities, build brand awareness, and drive engagement.</p>
+            <p style="color:#8B8D91;font-size:13.5px;line-height:1.7;">Ran campaigns for 3 brands simultaneously. Coordinated incubation programs with 30+ participants, mentors, and judges. I measure strategy by what changed after — not what was sent.</p>
           </div>
         </div>
       </div>
@@ -237,22 +259,6 @@
             </div>
           </div>
 
-          <!-- TGI -->
-          <div class="reveal" style="position:relative;margin-bottom:36px;transition-delay:0.19s;">
-            <div class="timeline-dot" style="background:#00D9A3;box-shadow:0 0 8px rgba(0,217,163,0.6);"></div>
-            <div style="display:flex;gap:14px;align-items:flex-start;">
-              <div style="flex-shrink:0;width:40px;height:40px;background:#111214;border:1px solid #1E2024;display:flex;align-items:center;justify-content:center;overflow:hidden;">
-                <img src="./assets/images/logos/tgi.png" alt="TGI" style="width:32px;height:32px;object-fit:contain;">
-              </div>
-              <div>
-                <h3 style="font-size:13px;font-weight:600;margin-bottom:3px;">TUX Global Institute</h3>
-                <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;margin-bottom:4px;">Feb 2025 – Present · Phnom Penh, Cambodia</p>
-                <p style="font-size:13px;color:rgba(255,255,255,0.75);margin-bottom:8px;">Associate's Degree in Artificial Intelligence</p>
-                <span class="badge-mint">Fully Funded Scholarship</span>
-              </div>
-            </div>
-          </div>
-
           <!-- Collingwood -->
           <div class="reveal" style="position:relative;margin-bottom:36px;transition-delay:0.26s;">
             <div class="timeline-dot dim"></div>
@@ -297,101 +303,107 @@
         <div style="display:flex;flex-direction:column;gap:10px;">
 
           <!-- ADITI — Current, most recent -->
-          <div class="card reveal" style="transition-delay:0.05s;" data-acc>
-            <div style="padding:22px 24px;display:flex;align-items:flex-start;justify-content:space-between;cursor:pointer;" onclick="toggleAcc(this)">
-              <div>
-                <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <div class="card reveal" style="transition-delay:0.05s;border-left:2px solid #6C63FF;" data-acc>
+            <div style="padding:22px 24px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;cursor:pointer;" onclick="toggleAcc(this)">
+              <div style="flex:1;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
                   <span style="width:6px;height:6px;border-radius:50%;background:#00D9A3;flex-shrink:0;" class="glow-mint"></span>
                   <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#00D9A3;letter-spacing:0.06em;">Current</span>
                 </div>
-                <h3 style="font-size:13.5px;font-weight:600;margin-bottom:3px;">Digital Marketing Strategist</h3>
-                <p style="font-size:12px;color:#8B8D91;">ADITI — Asia Digital Technology Innovation · Dec 2025 – Present</p>
+                <h3 style="font-size:14px;font-weight:700;margin-bottom:4px;">Digital Marketing Strategist</h3>
+                <p style="font-size:12px;color:#8B8D91;margin-bottom:10px;">ADITI — Asia Digital Technology Innovation · Dec 2025 – Present</p>
+                <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6C63FF;background:rgba(108,99,255,0.1);border:1px solid rgba(108,99,255,0.2);padding:2px 8px;">3 brands</span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;background:rgba(139,141,145,0.07);border:1px solid rgba(139,141,145,0.15);padding:2px 8px;">Digital Strategy</span>
+                </div>
+                <p style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#6C63FF;letter-spacing:0.08em;text-transform:uppercase;">Click to expand details</p>
               </div>
               <i class="fas fa-plus acc-icon" style="font-size:11px;color:#8B8D91;margin-top:4px;transition:transform 0.3s;flex-shrink:0;"></i>
             </div>
             <div class="acc-body">
               <div class="acc-inner" style="padding:0 24px 22px;">
-                <p style="font-size:13px;color:#8B8D91;line-height:1.75;margin-bottom:14px;">Lead marketing for NironCare, ADITI, and ADITI Academy across social media and digital channels. Create and manage engaging content while ensuring brand consistency across platforms.</p>
-                <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
-                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Led digital initiatives across multiple brands, coordinating design, content, and strategy teams</li>
-                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Translated business goals into campaign strategies ensuring alignment across stakeholders</li>
-                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Monitored performance metrics and iterated strategies based on data insights</li>
-                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Supported partnership development and cross-team collaboration</li>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Managed digital strategy for <strong style="color:#fff;">3 brands</strong> simultaneously — unified content voice without losing each brand's distinct identity</li>
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Built and owned the full content pipeline: brief → design → scheduling → performance review, weekly across all channels</li>
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Shifted content mix based on weekly metrics — moved from assumption-driven to data-driven publishing</li>
                 </ul>
               </div>
             </div>
           </div>
 
           <!-- ATC — ended -->
-          <div class="card reveal" style="transition-delay:0.1s;" data-acc>
-            <div style="padding:22px 24px;display:flex;align-items:flex-start;justify-content:space-between;cursor:pointer;" onclick="toggleAcc(this)">
-              <div>
-                <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-                  <span style="width:6px;height:6px;border-radius:50%;background:#2E3035;flex-shrink:0;"></span>
-                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;letter-spacing:0.06em;">Mar 2025 – Nov 2025</span>
+          <div class="card reveal" style="transition-delay:0.1s;border-left:2px solid rgba(108,99,255,0.3);" data-acc>
+            <div style="padding:22px 24px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;cursor:pointer;" onclick="toggleAcc(this)">
+              <div style="flex:1;">
+                <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;letter-spacing:0.06em;margin-bottom:8px;">Mar 2025 – Nov 2025</p>
+                <h3 style="font-size:14px;font-weight:700;margin-bottom:4px;">Junior Associate, Program &amp; Marketing</h3>
+                <p style="font-size:12px;color:#8B8D91;margin-bottom:10px;">AUPP Technology Center (ATC)</p>
+                <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#00D9A3;background:rgba(0,217,163,0.08);border:1px solid rgba(0,217,163,0.2);padding:2px 8px;">100+ students</span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;background:rgba(139,141,145,0.07);border:1px solid rgba(139,141,145,0.15);padding:2px 8px;">Events &amp; Marketing</span>
                 </div>
-                <h3 style="font-size:13.5px;font-weight:600;margin-bottom:3px;">Junior Associate, Program &amp; Marketing</h3>
-                <p style="font-size:12px;color:#8B8D91;">AUPP Technology Center (ATC)</p>
+                <p style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#6C63FF;letter-spacing:0.08em;text-transform:uppercase;">Click to expand details</p>
               </div>
               <i class="fas fa-plus acc-icon" style="font-size:11px;color:#8B8D91;margin-top:4px;transition:transform 0.3s;flex-shrink:0;"></i>
             </div>
             <div class="acc-body">
               <div class="acc-inner" style="padding:0 24px 22px;">
-                <p style="font-size:13px;color:#8B8D91;line-height:1.75;margin-bottom:14px;">Planned and executed campaigns supporting tech programs, hackathons, and workshops, improving visibility and participant engagement.</p>
-                <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
-                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Coordinated with design, events, and partnership teams to align communication and program goals</li>
-                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Analyzed campaign performance and user engagement insights to refine strategy</li>
-                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Supported community-building initiatives through structured content and event-focused collaboration</li>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Supported marketing for events reaching <strong style="color:#fff;">100+ student participants</strong> — handled promotion, comms, and day-of coordination</li>
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Identified a breakdown in pre-event communication causing drop-off; rewrote the onboarding messaging sequence</li>
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Delivered post-event analytics reports linking content formats to registration and attendance outcomes</li>
                 </ul>
               </div>
             </div>
           </div>
 
           <!-- Communication Lead — ended -->
-          <div class="card reveal" style="transition-delay:0.15s;" data-acc>
-            <div style="padding:22px 24px;display:flex;align-items:flex-start;justify-content:space-between;cursor:pointer;" onclick="toggleAcc(this)">
-              <div>
-                <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-                  <span style="width:6px;height:6px;border-radius:50%;background:#2E3035;flex-shrink:0;"></span>
-                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;letter-spacing:0.06em;">Apr 2025 – Nov 2025</span>
+          <div class="card reveal" style="transition-delay:0.15s;border-left:2px solid rgba(108,99,255,0.3);" data-acc>
+            <div style="padding:22px 24px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;cursor:pointer;" onclick="toggleAcc(this)">
+              <div style="flex:1;">
+                <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;letter-spacing:0.06em;margin-bottom:8px;">Apr 2025 – Nov 2025</p>
+                <h3 style="font-size:14px;font-weight:700;margin-bottom:4px;">Communication Lead</h3>
+                <p style="font-size:12px;color:#8B8D91;margin-bottom:10px;">ACTSmart Incubation Program</p>
+                <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6C63FF;background:rgba(108,99,255,0.1);border:1px solid rgba(108,99,255,0.2);padding:2px 8px;">30+ applicants</span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;background:rgba(139,141,145,0.07);border:1px solid rgba(139,141,145,0.15);padding:2px 8px;">Incubation · Comms</span>
                 </div>
-                <h3 style="font-size:13.5px;font-weight:600;margin-bottom:3px;">Communication Lead</h3>
-                <p style="font-size:12px;color:#8B8D91;">ACTSmart Incubation Program</p>
+                <p style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#6C63FF;letter-spacing:0.08em;text-transform:uppercase;">Click to expand details</p>
               </div>
               <i class="fas fa-plus acc-icon" style="font-size:11px;color:#8B8D91;margin-top:4px;transition:transform 0.3s;flex-shrink:0;"></i>
             </div>
             <div class="acc-body">
               <div class="acc-inner" style="padding:0 24px 22px;">
-                <p style="font-size:13px;color:#8B8D91;line-height:1.75;margin-bottom:14px;">Managed all internal and external communication — official announcements, email updates, and coordination across teams, mentors, and judges to ensure smooth program execution.</p>
-                <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
-                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Managed Telegram channel, social media captions, and press/media outreach</li>
-                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Coordinated cross-functional teams to align timelines, messaging, and operational objectives</li>
-                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Improved collaboration processes to enhance participant experience and program delivery</li>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Single point of contact for <strong style="color:#fff;">3 teams, mentors, judges, and 30+ startup applicants</strong> — zero missed updates across the entire program run</li>
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Built communication infrastructure from scratch: templates, Telegram structure, announcement cadence, escalation paths</li>
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Managed press outreach and live social coverage during demo day — real-time updates under pressure</li>
                 </ul>
               </div>
             </div>
           </div>
 
           <!-- Project Initiator -->
-          <div class="card reveal" style="transition-delay:0.2s;" data-acc>
-            <div style="padding:22px 24px;display:flex;align-items:flex-start;justify-content:space-between;cursor:pointer;" onclick="toggleAcc(this)">
-              <div>
-                <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-                  <span style="width:6px;height:6px;border-radius:50%;background:#2E3035;flex-shrink:0;"></span>
-                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;letter-spacing:0.06em;">Dec 2024 – Mar 2025</span>
+          <div class="card reveal" style="transition-delay:0.2s;border-left:2px solid rgba(108,99,255,0.3);" data-acc>
+            <div style="padding:22px 24px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;cursor:pointer;" onclick="toggleAcc(this)">
+              <div style="flex:1;">
+                <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;letter-spacing:0.06em;margin-bottom:8px;">Dec 2024 – Mar 2025</p>
+                <h3 style="font-size:14px;font-weight:700;margin-bottom:4px;">Project Initiator</h3>
+                <p style="font-size:12px;color:#8B8D91;margin-bottom:10px;">ATC NextGen Impact</p>
+                <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#00D9A3;background:rgba(0,217,163,0.08);border:1px solid rgba(0,217,163,0.2);padding:2px 8px;">0 → 1 program</span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;background:rgba(139,141,145,0.07);border:1px solid rgba(139,141,145,0.15);padding:2px 8px;">Youth Tech</span>
                 </div>
-                <h3 style="font-size:13.5px;font-weight:600;margin-bottom:3px;">Project Initiator</h3>
-                <p style="font-size:12px;color:#8B8D91;">ATC NextGen Impact</p>
+                <p style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#6C63FF;letter-spacing:0.08em;text-transform:uppercase;">Click to expand details</p>
               </div>
               <i class="fas fa-plus acc-icon" style="font-size:11px;color:#8B8D91;margin-top:4px;transition:transform 0.3s;flex-shrink:0;"></i>
             </div>
             <div class="acc-body">
               <div class="acc-inner" style="padding:0 24px 22px;">
-                <p style="font-size:13px;color:#8B8D91;line-height:1.75;margin-bottom:14px;">Core initiator of ATC NextGen Impact — from brainstorming the concept to kicking off first pilot programs focused on youth innovation, digital skills, and career readiness.</p>
-                <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
-                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Spearheaded project design and roadmap, coordinating across departments for scalable execution</li>
-                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Co-led recruitment and onboarding of participants, mentors, and partners for first cohort</li>
-                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Built branding and communications plan; contributed to workshops and mentorship logistics</li>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Saw the gap in youth tech access, pitched the program to ATC leadership, and got buy-in within one semester</li>
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Designed full program structure end-to-end: curriculum format, cohort model, mentor matching, and workshop content</li>
+                  <li style="font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;margin-top:2px;">&#9657;</span>Recruited first cohort; delivered pilot workshops and handed off a documented playbook for continuity</li>
                 </ul>
               </div>
             </div>
@@ -415,47 +427,70 @@
 
     <div id="skillsGrid" style="display:grid;gap:56px;">
 
-      <!-- Skill bars -->
+      <!-- Skill groups -->
       <div class="reveal" id="skillsSection">
-        <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6C63FF;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:28px;">Current Tools & Skills</p>
-        <div style="display:flex;flex-direction:column;gap:20px;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6C63FF;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:28px;">Technical Skills</p>
 
-          <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;"><img src="./assets/images/skills/vscode.png" alt="" style="width:16px;height:16px;object-fit:contain;">VS Code &amp; Jupyter</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8B8D91;">90%</span></div><div style="height:2px;background:#1E2024;border-radius:1px;"><div class="skill-fill" data-p="90"></div></div></div>
+        <div style="display:flex;flex-direction:column;gap:28px;">
 
-          <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;"><img src="./assets/images/skills/python.png" alt="" style="width:16px;height:16px;object-fit:contain;">Python</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8B8D91;">85%</span></div><div style="height:2px;background:#1E2024;border-radius:1px;"><div class="skill-fill" data-p="85"></div></div></div>
-
-          <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;"><img src="./assets/images/skills/git.png" alt="" style="width:16px;height:16px;object-fit:contain;">Git &amp; GitHub</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8B8D91;">80%</span></div><div style="height:2px;background:#1E2024;border-radius:1px;"><div class="skill-fill" data-p="80"></div></div></div>
-
-          <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;"><img src="./assets/images/skills/colab.png" alt="" style="width:16px;height:16px;object-fit:contain;">Google Colab</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8B8D91;">80%</span></div><div style="height:2px;background:#1E2024;border-radius:1px;"><div class="skill-fill" data-p="80"></div></div></div>
-
-          <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;"><img src="./assets/images/skills/java.png" alt="" style="width:16px;height:16px;object-fit:contain;">Java</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8B8D91;">75%</span></div><div style="height:2px;background:#1E2024;border-radius:1px;"><div class="skill-fill" data-p="75"></div></div></div>
-
-          <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;"><img src="./assets/images/skills/figma.svg" alt="" style="width:16px;height:16px;object-fit:contain;">Figma</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8B8D91;">75%</span></div><div style="height:2px;background:#1E2024;border-radius:1px;"><div class="skill-fill" data-p="75"></div></div></div>
-
-          <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;"><img src="./assets/images/skills/cpp.svg" alt="" style="width:16px;height:16px;object-fit:contain;">C++</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8B8D91;">70%</span></div><div style="height:2px;background:#1E2024;border-radius:1px;"><div class="skill-fill" data-p="70"></div></div></div>
-
-          <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;"><img src="./assets/images/skills/tensorflow.png" alt="" style="width:16px;height:16px;object-fit:contain;">TensorFlow</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8B8D91;">70%</span></div><div style="height:2px;background:#1E2024;border-radius:1px;"><div class="skill-fill" data-p="70"></div></div></div>
-
-          <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;"><img src="./assets/images/skills/ocr.png" alt="" style="width:16px;height:16px;object-fit:contain;">OCR Tools</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8B8D91;">70%</span></div><div style="height:2px;background:#1E2024;border-radius:1px;"><div class="skill-fill" data-p="70"></div></div></div>
-
-          <div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;"><img src="./assets/images/skills/javascript.svg" alt="" style="width:16px;height:16px;object-fit:contain;">JavaScript (Basic)</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8B8D91;">60%</span></div><div style="height:2px;background:#1E2024;border-radius:1px;"><div class="skill-fill" data-p="60"></div></div></div>
-        </div>
-
-        <!-- Tools row -->
-        <div style="margin-top:32px;padding-top:24px;border-top:1px solid #1E2024;">
-          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:16px;">Product &amp; Analytics Tools</p>
-          <div style="display:flex;flex-wrap:wrap;gap:8px;">
-            <span class="tag-chip">Streamlit</span>
-            <span class="tag-chip">Excel</span>
-            <span class="tag-chip">Google Workspace</span>
-            <span class="tag-chip">Canva</span>
-            <span class="tag-chip">Notion</span>
-            <span class="tag-chip">Arduino</span>
+          <div>
+            <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#00D9A3;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">AI / ML</p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+              <span class="tag-chip">Python</span>
+              <span class="tag-chip">TensorFlow</span>
+              <span class="tag-chip">XGBoost</span>
+              <span class="tag-chip">scikit-learn</span>
+              <span class="tag-chip">OCR</span>
+              <span class="tag-chip">Pandas</span>
+              <span class="tag-chip">NumPy</span>
+            </div>
+            <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;letter-spacing:0.06em;">→ Used in: Sales Forecasting Model · Smart Expense Tracker</p>
           </div>
+
+          <div>
+            <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6C63FF;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Product &amp; Data</p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+              <span class="tag-chip">Streamlit</span>
+              <span class="tag-chip">Figma</span>
+              <span class="tag-chip">Notion</span>
+              <span class="tag-chip">Google Analytics</span>
+              <span class="tag-chip">Excel</span>
+              <span class="tag-chip">Google Workspace</span>
+            </div>
+            <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;letter-spacing:0.06em;">→ Used in: Levelio · ATC campaigns · ADITI brand strategy</p>
+          </div>
+
+          <div>
+            <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#00D9A3;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Engineering</p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+              <span class="tag-chip">Git / GitHub</span>
+              <span class="tag-chip">Java</span>
+              <span class="tag-chip">C++</span>
+              <span class="tag-chip">JavaScript</span>
+              <span class="tag-chip">HTML / CSS</span>
+              <span class="tag-chip">Arduino</span>
+              <span class="tag-chip">VS Code</span>
+              <span class="tag-chip">Jupyter</span>
+            </div>
+            <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;letter-spacing:0.06em;">→ Used in: This portfolio · university coursework · hardware prototypes</p>
+          </div>
+
+          <div>
+            <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6C63FF;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Communication &amp; Strategy</p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+              <span class="tag-chip">Content Strategy</span>
+              <span class="tag-chip">Campaign Management</span>
+              <span class="tag-chip">Program Coordination</span>
+              <span class="tag-chip">Stakeholder Comms</span>
+              <span class="tag-chip">Canva</span>
+            </div>
+            <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;letter-spacing:0.06em;">→ Used in: ADITI · ACTSmart Incubation · ATC NextGen Impact</p>
+          </div>
+
         </div>
 
         <!-- Certifications -->
-        <div style="margin-top:24px;padding-top:24px;border-top:1px solid #1E2024;">
+        <div style="margin-top:32px;padding-top:24px;border-top:1px solid #1E2024;">
           <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:16px;">Certifications</p>
           <div style="display:flex;flex-direction:column;gap:10px;">
             <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.72);">
@@ -549,10 +584,10 @@
             <span class="tag-chip">Product Design</span>
           </div>
         </div>
-        <p style="color:#8B8D91;font-size:13px;line-height:1.8;margin-bottom:16px;">Defined product vision for a web-based platform focused on improving completion rates in tech learning. Designed structured learning flows using gamified "levels" to guide users toward portfolio-ready projects.</p>
+        <p style="color:#8B8D91;font-size:13px;line-height:1.8;margin-bottom:16px;">Most CS learners never ship anything — they finish tutorials but have no portfolio, no proof they can build. Levelio reframes the unit of progress: instead of lessons completed, it's projects shipped. Each level unlocks the next real-world build, with AI guidance adapting to your current skill level.</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;">
-          <li style="font-size:12.5px;color:rgba(255,255,255,0.65);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;">&#9657;</span>Planned core features: AI project guidance, skill progression tracking, project-based workflows</li>
-          <li style="font-size:12.5px;color:rgba(255,255,255,0.65);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;">&#9657;</span>Conducted user-focused research to align product direction with student motivation and career-readiness needs</li>
+          <li style="font-size:12.5px;color:rgba(255,255,255,0.65);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;">&#9657;</span>Analysed drop-off patterns across 5 competitor platforms — identified the exact moment users disengage (post-tutorial, pre-first-project)</li>
+          <li style="font-size:12.5px;color:rgba(255,255,255,0.65);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;">&#9657;</span>Designed AI guidance layer: context-aware hints, adaptive difficulty, and portfolio-progress tracking to keep learners in flow</li>
         </ul>
         <div style="margin-top:20px;padding-top:16px;border-top:1px solid #1E2024;display:flex;align-items:center;justify-content:space-between;">
           <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;">Role: Product Concept &amp; Strategy</span>
@@ -576,10 +611,10 @@
             <span class="tag-chip">Streamlit</span>
           </div>
         </div>
-        <p style="color:#8B8D91;font-size:13px;line-height:1.8;margin-bottom:16px;">Python-based expense tracking app combining manual input and OCR-powered receipt scanning for automated logging. Captures vendor, date, and amount from receipts to improve input efficiency and user experience.</p>
+        <p style="color:#8B8D91;font-size:13px;line-height:1.8;margin-bottom:16px;">Manual expense logging fails because it's too slow — so people stop after a week and have no idea where their money went. Built a Python app that reads receipts via OCR, extracts vendor, date, and amount automatically, and visualises spending trends in a live Streamlit dashboard. Goal: zero-effort financial awareness.</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;">
-          <li style="font-size:12.5px;color:rgba(255,255,255,0.65);display:flex;gap:10px;"><span style="color:#00D9A3;flex-shrink:0;">&#9657;</span>Designed interactive dashboards with category and monthly trend visualization</li>
-          <li style="font-size:12.5px;color:rgba(255,255,255,0.65);display:flex;gap:10px;"><span style="color:#00D9A3;flex-shrink:0;">&#9657;</span>Integrated backend logic, OCR processing, and Streamlit UI in cohesive architecture</li>
+          <li style="font-size:12.5px;color:rgba(255,255,255,0.65);display:flex;gap:10px;"><span style="color:#00D9A3;flex-shrink:0;">&#9657;</span>OCR pipeline reduced data entry from <strong style="color:#fff;">~8 manual fields to 1 action</strong> (photo upload) — removing the main friction point entirely</li>
+          <li style="font-size:12.5px;color:rgba(255,255,255,0.65);display:flex;gap:10px;"><span style="color:#00D9A3;flex-shrink:0;">&#9657;</span>Dashboard surfaces category breakdowns and monthly trend lines that were previously buried in raw data — built for insight, not data dump</li>
         </ul>
         <div style="margin-top:20px;padding-top:16px;border-top:1px solid #1E2024;">
           <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;">Role: Product Design &amp; Technical Development</span>
@@ -603,10 +638,10 @@
             <span class="tag-chip">Python</span>
           </div>
         </div>
-        <p style="color:#8B8D91;font-size:13px;line-height:1.8;margin-bottom:16px;">Built a machine learning forecasting solution for monthly sales prediction using feature engineering and gradient boosting (XGBoost). Compared statistical, neural network, and ensemble approaches to evaluate performance and business applicability.</p>
+        <p style="color:#8B8D91;font-size:13px;line-height:1.8;margin-bottom:16px;">Businesses making inventory decisions on gut feel either overstock or run dry. Built an XGBoost model with 43 hand-engineered features, benchmarked against ARIMA and LSTM to find the right accuracy/complexity tradeoff.</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;">
-          <li style="font-size:12.5px;color:rgba(255,255,255,0.65);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;">&#9657;</span>Engineered <strong style="color:#fff;">43 predictive features</strong> — improved accuracy ~40% over baseline</li>
-          <li style="font-size:12.5px;color:rgba(255,255,255,0.65);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;">&#9657;</span>Developed interactive dashboard to visualize forecasts and support data-driven business planning</li>
+          <li style="font-size:12.5px;color:rgba(255,255,255,0.65);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;">&#9657;</span>Engineered <strong style="color:#fff;">43 features</strong> — <strong style="color:#fff;">~40% accuracy gain</strong> over baseline; <strong style="color:#fff;">11.6% MAPE</strong>, <strong style="color:#fff;">0.856 R²</strong></li>
+          <li style="font-size:12.5px;color:rgba(255,255,255,0.65);display:flex;gap:10px;"><span style="color:#6C63FF;flex-shrink:0;">&#9657;</span>Benchmarked XGBoost vs. ARIMA vs. LSTM; dashboard makes forecasts readable without touching the model</li>
         </ul>
         <div style="margin-top:20px;padding-top:16px;border-top:1px solid #1E2024;">
           <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8B8D91;">Role: Data &amp; Product Analytics</span>
